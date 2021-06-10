@@ -1,0 +1,31 @@
+{
+  "name": "v31-bears-team-02be",
+  "version": "1.0.0",
+  "description": "Your project's `readme` is as important to success as your code. For  this reason you should put as much care into its creation and maintenance as you would any other component of the application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node server.js --ignore client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyages/v31-bears-team-02be.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chingu-voyages/v31-bears-team-02be/issues"
+  },
+  "homepage": "https://github.com/chingu-voyages/v31-bears-team-02be#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.5",
+    "@babel/node": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
+    "nodemon": "^2.0.7"
+  }
+}
