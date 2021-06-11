@@ -9,7 +9,8 @@
 /coverage
 
 # production
-# /build
+# Commenting this to push build to remote repo
+#/build
 
 # misc
 .DS_Store
