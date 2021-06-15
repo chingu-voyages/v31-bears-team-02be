@@ -1,0 +1,24 @@
+.game-screen {
+  display: grid;
+  width: auto;
+  height: 90vh;
+  place-items: center;
+  border: solid 2px black;
+  /* background: blue; */
+}
+
+.art-container {
+  border: 2px solid blue;
+  padding: 1rem;
+}
+
+.gameui-container {
+  border: 2px solid red;
+  padding: 1rem;
+}
+
+.multiple-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}

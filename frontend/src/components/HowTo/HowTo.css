@@ -1,0 +1,43 @@
+.how-to-play {
+  width: 100%;
+  max-width: 45em;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media only screen and (min-width: 60em) {
+  .how-to-play {
+    max-width: 60em;
+  }
+}
+
+@media only screen and (min-width: 75em) {
+  .how-to-play {
+    max-width: 75em;
+  }
+}
+
+@media only screen and (min-width: 87.5em) {
+  .how-to-play {
+    max-width: 87.5em;
+  }
+}
+
+.how-to-play > section {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.how-to-play > section > ul {
+  flex-basis: 0;
+  flex-grow: 999;
+  padding: 1rem;
+}
+
+.how-to-play > section > img {
+  flex-basis: 640px;
+  flex-grow: 1;
+}
