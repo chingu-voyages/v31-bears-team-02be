@@ -2,6 +2,7 @@
 //
 import path from 'path';
 import express from 'express';
+const router = require('./routes');
 
 const PORT = process.env.HTTP_PORT || 4001;
 // const PORT = process.env.PORT || 4001;
@@ -26,3 +27,7 @@ app.get('/flower', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server listening at port ${PORT}.`);
 });
+
+
+// express.json() is a built-in middleware, parses incoming JSON requests, returns Object
+app.use(express.json());
