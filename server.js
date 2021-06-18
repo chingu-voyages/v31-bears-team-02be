@@ -31,3 +31,4 @@ app.listen(PORT, () => {
 
 // express.json() is a built-in middleware, parses incoming JSON requests, returns Object
 app.use(express.json());
+app.use(router);
