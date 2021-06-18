@@ -15,3 +15,5 @@ class UserDAO {
 		return id;
 	}
 }
+
+module.exports = new UserDAO();
