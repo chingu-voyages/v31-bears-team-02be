@@ -1,3 +1,6 @@
+// going to read .env file
+require('dotenv').config();
+
 // Update with your config settings.
 // We need this knexfile to run migrations
 
@@ -6,9 +9,11 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',        
-      user:     'postgres',
-      password: 'Artguessr2021!'
+      database: process.env.RDS_DB_NAME,        
+      user:     process.env.RDS_USERNAME,
+      password: process.env.RDS_PASSWORD,
+      port: process.env.RDS_PORT,
+      host: process.env.RDS_HOSTNAME
     },
     pool: {
       min: 2,

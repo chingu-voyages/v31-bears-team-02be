@@ -5,3 +5,5 @@
 !.elasticbeanstalk/*.global.yml
 
 artguessr.pem
+
+.env

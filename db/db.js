@@ -12,3 +12,6 @@ const db = knex(knexfile.development);
 
 module.exports = db;
 
+// in terminal run:
+// npx knex migrate:make init --migrations-directory db/migrations
+// 12;04
