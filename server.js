@@ -18,7 +18,8 @@ app.get('/', (req, res) => {
 app.get('/flower', (req, res) => {
   res.json({
     name: 'Dandelion',
-    colour: 'Blue-ish'
+    colour: 'Blue-ish',
+    env: process.env,
   });
 });
 
