@@ -7,3 +7,4 @@
 artguessr.pem
 
 .env
+postgrator-dev.config.js
