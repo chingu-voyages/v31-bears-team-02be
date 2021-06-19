@@ -21,7 +21,9 @@ function Art({ art, correctArt }) {
         }
         alt={"art file"}
       />
-      <p>{correctArt.artistDisplayName}</p>
+      <p>
+        {correctArt.artistDisplayName}
+      </p>
     </div>
   );
 }

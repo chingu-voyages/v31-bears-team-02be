@@ -79,8 +79,6 @@ const Game = () => {
     }
   }, [roundCounter]);
 
-  useEffect(() => {}, [correctArt]);
-
   if (gameOver) {
     return (
       <div className="game-screen">
