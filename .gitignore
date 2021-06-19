@@ -5,3 +5,6 @@
 !.elasticbeanstalk/*.global.yml
 
 artguessr.pem
+.env
+access.log
+/node_modules
