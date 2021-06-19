@@ -64,7 +64,7 @@ const Game = () => {
   useEffect(() => {
     if (art) {
       setArtImgLoaded(false);
-      if (art.length === 0) console.log("game over");
+      if (art.length === 0) return;
       const newRoundArt = art.slice(0, 4);
       setRoundArt(newRoundArt);
       setArt((art) => art.slice(4));
