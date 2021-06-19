@@ -6,7 +6,11 @@ function Art({ art, correctArt }) {
 
   return (
     <div className="art-container">
-      <Magnifier src={correctArt.primaryImageSmall} alt={"art file"} />
+      <Magnifier
+        src={correctArt.primaryImageSmall}
+        zoomImgSrc={correctArt.primaryImage}
+        alt={"art file"}
+      />
       <p>{correctArt.artistDisplayName}</p>
     </div>
   );
