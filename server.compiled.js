@@ -8,6 +8,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 // server.js
 //
+var router = require('./routes');
+
 var PORT = process.env.HTTP_PORT || 4001; // const PORT = process.env.PORT || 4001;
 
 var app = (0, _express["default"])();
@@ -23,4 +25,7 @@ app.get('/flower', function (req, res) {
 });
 app.listen(PORT, function () {
   console.log("Server listening at port ".concat(PORT, "."));
-});
+}); // express.json() is a built-in middleware, parses incoming JSON requests, returns Object
+
+app.use(_express["default"].json());
+app.use(router);

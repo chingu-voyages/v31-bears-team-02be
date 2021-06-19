@@ -8,3 +8,4 @@ artguessr.pem
 .env
 access.log
 /node_modules
+postgrator-dev.config.js
