@@ -24,6 +24,7 @@ const Game = () => {
     10,
   ]);
   const [gameOver, setGameOver] = useState(false);
+  const [artImgLoaded, setArtImgLoaded] = useState(false);
 
   useEffect(() => {
     const url =
@@ -62,13 +63,23 @@ const Game = () => {
 
   useEffect(() => {
     if (art) {
+      setArtImgLoaded(false);
       if (art.length === 0) console.log("game over");
       const newRoundArt = art.slice(0, 4);
       setRoundArt(newRoundArt);
       setArt((art) => art.slice(4));
-      setCorrectArt(newRoundArt[Math.floor(Math.random() * 4)]);
+      const newCorrectArt = newRoundArt[Math.floor(Math.random() * 4)];
+
+      // Preload image before rendering game ui
+      const artImg = new Image();
+      artImg.src = newCorrectArt.primaryImageSmall;
+      artImg.onload = () => setArtImgLoaded(true);
+
+      setCorrectArt(newCorrectArt);
     }
   }, [roundCounter]);
+
+  useEffect(() => {}, [correctArt]);
 
   if (gameOver) {
     return (
@@ -93,16 +104,18 @@ const Game = () => {
             roundCounter={roundCounter}
           />
         ) : (
-          <GameUI
-            correctArt={correctArt}
-            roundArt={roundArt}
-            roundCounter={roundCounter}
-            setRoundCounter={setRoundCounter}
-            setAnswerChosen={setAnswerChosen}
-            answerChosen={answerChosen}
-            roundHistory={roundHistory}
-            setRoundHistory={setRoundHistory}
-          />
+          artImgLoaded && (
+            <GameUI
+              correctArt={correctArt}
+              roundArt={roundArt}
+              roundCounter={roundCounter}
+              setRoundCounter={setRoundCounter}
+              setAnswerChosen={setAnswerChosen}
+              answerChosen={answerChosen}
+              roundHistory={roundHistory}
+              setRoundHistory={setRoundHistory}
+            />
+          )
         ))}
       {art && <div>{roundHistory.join(" - ")}</div>}
     </div>
