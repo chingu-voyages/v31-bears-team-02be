@@ -59,3 +59,25 @@
   align-items: top;
   justify-content: center;
 }
+
+.game-start {
+  max-width: 500px;
+  margin: 5em 1em 0 1em;
+}
+
+.game-start h2 {
+  text-align: center;
+}
+
+.game-start ul {
+  list-style: none;
+  padding: 0;
+}
+
+.game-start ul li {
+  margin-bottom: 2em;
+}
+
+.game-start .button-container {
+  text-align: center;
+}

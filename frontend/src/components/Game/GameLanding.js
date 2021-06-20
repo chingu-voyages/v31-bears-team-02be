@@ -3,8 +3,8 @@ const GameLanding = ({ setGameStarted, gameStarted }) => {
     setGameStarted((state) => !state);
   }
   return (
-    <div>
-      <h2>How to play:</h2>
+    <div class="game-start">
+      <h2>How to play</h2>
       <ul>
         <li>Each game consists of ten rounds.</li>
         <li>Each round you will be shown an artwork or artifact.</li>
@@ -23,7 +23,9 @@ const GameLanding = ({ setGameStarted, gameStarted }) => {
           guessing round.
         </li>
       </ul>
-      <button onClick={toggleStart}>Start!</button>
+      <div class="button-container">
+        <button onClick={toggleStart}>Start!</button>
+      </div>
     </div>
   );
 };
