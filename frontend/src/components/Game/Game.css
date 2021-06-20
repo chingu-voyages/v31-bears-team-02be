@@ -60,24 +60,24 @@
   justify-content: center;
 }
 
-.game-start {
+.game-landing {
   max-width: 500px;
   margin: 5em 1em 0 1em;
 }
 
-.game-start h2 {
+.game-landing h2 {
   text-align: center;
 }
 
-.game-start ul {
+.game-landing ul {
   list-style: none;
   padding: 0;
 }
 
-.game-start ul li {
+.game-landing ul li {
   margin-bottom: 2em;
 }
 
-.game-start .button-container {
+.game-landing .button-container {
   text-align: center;
 }

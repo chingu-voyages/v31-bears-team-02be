@@ -3,7 +3,7 @@ const GameLanding = ({ setGameStarted, gameStarted }) => {
     setGameStarted((state) => !state);
   }
   return (
-    <div class="game-start">
+    <div class="game-landing">
       <h2>How to play</h2>
       <ul>
         <li>Each game consists of ten rounds.</li>
