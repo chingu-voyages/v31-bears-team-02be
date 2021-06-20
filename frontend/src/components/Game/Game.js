@@ -4,6 +4,7 @@ import "./Game.css";
 import GameUI from "./GameUI";
 import ArtInfoDialog from "./ArtInfoDialog";
 import GameOver from "./GameOver";
+import GameLanding from "./GameLanding";
 
 const Game = () => {
   const [art, setArt] = useState(null);
@@ -12,19 +13,11 @@ const Game = () => {
   const [answerChosen, setAnswerChosen] = useState(false);
   const [roundArt, setRoundArt] = useState(null);
   const [roundHistory, setRoundHistory] = useState([
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
   ]);
   const [gameOver, setGameOver] = useState(false);
   const [artImgLoaded, setArtImgLoaded] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
     const url =
@@ -63,8 +56,8 @@ const Game = () => {
 
   useEffect(() => {
     if (art) {
-      setArtImgLoaded(false);
       if (art.length === 0) return;
+      setArtImgLoaded(false);
       const newRoundArt = art.slice(0, 4);
       setRoundArt(newRoundArt);
       setArt((art) => art.slice(4));
@@ -89,33 +82,41 @@ const Game = () => {
 
   return (
     <div className="game-screen">
-      {roundArt && correctArt && <Art correctArt={correctArt} art={art} />}
-      {roundArt &&
-        art &&
-        (answerChosen ? (
-          <ArtInfoDialog
-            setAnswerChosen={setAnswerChosen}
-            setRoundCounter={setRoundCounter}
-            artInfo={correctArt}
-            setCorrectArt={setCorrectArt}
-            setGameOver={setGameOver}
-            roundCounter={roundCounter}
-          />
-        ) : (
-          artImgLoaded && (
-            <GameUI
-              correctArt={correctArt}
-              roundArt={roundArt}
-              roundCounter={roundCounter}
-              setRoundCounter={setRoundCounter}
-              setAnswerChosen={setAnswerChosen}
-              answerChosen={answerChosen}
-              roundHistory={roundHistory}
-              setRoundHistory={setRoundHistory}
-            />
-          )
-        ))}
-      {art && <div>{roundHistory.join(" - ")}</div>}
+      {gameStarted ? (
+        <>
+          {roundArt && correctArt && <Art correctArt={correctArt} art={art} />}
+          {roundArt &&
+            art &&
+            (answerChosen ? (
+              <ArtInfoDialog
+                setAnswerChosen={setAnswerChosen}
+                setRoundCounter={setRoundCounter}
+                artInfo={correctArt}
+                setCorrectArt={setCorrectArt}
+                setGameOver={setGameOver}
+                roundCounter={roundCounter}
+              />
+            ) : (
+              artImgLoaded && (
+                <GameUI
+                  correctArt={correctArt}
+                  roundArt={roundArt}
+                  roundCounter={roundCounter}
+                  setRoundCounter={setRoundCounter}
+                  setAnswerChosen={setAnswerChosen}
+                  answerChosen={answerChosen}
+                  roundHistory={roundHistory}
+                  setRoundHistory={setRoundHistory}
+                />
+              )
+            ))}
+          {art && (
+            <div className="round-history">{roundHistory.join(" - ")}</div>
+          )}
+        </>
+      ) : (
+        <GameLanding setGameStarted={setGameStarted} />
+      )}
     </div>
   );
 };
