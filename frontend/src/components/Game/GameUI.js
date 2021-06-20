@@ -78,7 +78,7 @@ const GameUI = ({
     <div className="gameui-container">
       <Timer timer={timer}></Timer>
       <div className="multiple-choice">{artButtons}</div>
-      <RoundCounter roundCounter={roundCounter}></RoundCounter>
+      {/* <RoundCounter roundCounter={roundCounter}></RoundCounter> */}
     </div>
   );
 };
