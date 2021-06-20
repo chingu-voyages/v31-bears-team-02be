@@ -31,10 +31,24 @@
   grid-row: 2;
   border: 2px solid red;
   padding: 1rem;
+  width: 100%;
 }
 
 .multiple-choice {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  place-items: center;
+}
+
+.choice-button {
+  white-space: normal;
+  word-wrap: break-word;
+  min-height: 3rem;
+  min-width: 10rem;
+  max-width: 20rem;
+}
+
+.art-info {
+  grid-row: 2;
 }
