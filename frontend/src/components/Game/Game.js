@@ -80,43 +80,43 @@ const Game = () => {
     );
   }
 
+  if (!gameStarted) {
+    return (
+      <div className="game-screen">
+        <GameLanding setGameStarted={setGameStarted} />
+      </div>
+    );
+  }
+
   return (
     <div className="game-screen">
-      {gameStarted ? (
-        <>
-          {roundArt && correctArt && <Art correctArt={correctArt} art={art} />}
-          {roundArt &&
-            art &&
-            (answerChosen ? (
-              <ArtInfoDialog
-                setAnswerChosen={setAnswerChosen}
-                setRoundCounter={setRoundCounter}
-                artInfo={correctArt}
-                setCorrectArt={setCorrectArt}
-                setGameOver={setGameOver}
-                roundCounter={roundCounter}
-              />
-            ) : (
-              artImgLoaded && (
-                <GameUI
-                  correctArt={correctArt}
-                  roundArt={roundArt}
-                  roundCounter={roundCounter}
-                  setRoundCounter={setRoundCounter}
-                  setAnswerChosen={setAnswerChosen}
-                  answerChosen={answerChosen}
-                  roundHistory={roundHistory}
-                  setRoundHistory={setRoundHistory}
-                />
-              )
-            ))}
-          {art && (
-            <div className="round-history">{roundHistory.join(" - ")}</div>
-          )}
-        </>
-      ) : (
-        <GameLanding setGameStarted={setGameStarted} />
-      )}
+      {roundArt && correctArt && <Art correctArt={correctArt} art={art} />}
+      {roundArt &&
+        art &&
+        (answerChosen ? (
+          <ArtInfoDialog
+            setAnswerChosen={setAnswerChosen}
+            setRoundCounter={setRoundCounter}
+            artInfo={correctArt}
+            setCorrectArt={setCorrectArt}
+            setGameOver={setGameOver}
+            roundCounter={roundCounter}
+          />
+        ) : (
+          artImgLoaded && (
+            <GameUI
+              correctArt={correctArt}
+              roundArt={roundArt}
+              roundCounter={roundCounter}
+              setRoundCounter={setRoundCounter}
+              setAnswerChosen={setAnswerChosen}
+              answerChosen={answerChosen}
+              roundHistory={roundHistory}
+              setRoundHistory={setRoundHistory}
+            />
+          )
+        ))}
+      {art && <div className="round-history">{roundHistory.join(" - ")}</div>}
     </div>
   );
 };
