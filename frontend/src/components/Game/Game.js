@@ -70,6 +70,7 @@ const Game = () => {
 
       setCorrectArt(newCorrectArt);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roundCounter]);
 
   if (gameOver) {

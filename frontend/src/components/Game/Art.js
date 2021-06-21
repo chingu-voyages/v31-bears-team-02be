@@ -31,7 +31,7 @@ function Art({ art, correctArt }) {
         />
       )}
       {/* </div> */}
-      <span>{correctArt.artistDisplayName}</span>
+      {/* <span>{correctArt.artistDisplayName}</span> */}
     </div>
   );
 }
