@@ -23,7 +23,14 @@
   max-width: 100%;
   max-height: 65vh;
   /* display: block; */
-  object-fit: contain;
+  /* object-fit: contain; */
+  /* padding: 1rem; */
+}
+
+.magnifier-image {
+  width: auto;
+  max-height: 65vh;
+  height: auto;
   /* padding: 1rem; */
 }
 
@@ -82,11 +89,4 @@
 
 .game-landing .button-container {
   text-align: center;
-}
-
-.magnifier-image {
-  width: auto;
-  max-height: 65vh;
-  height: auto;
-  padding: 1rem;
 }
