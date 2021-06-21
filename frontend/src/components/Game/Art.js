@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// import Magnifier from "react-magnifier";
+import Magnifier from "react-magnifier";
 // import ReactImageMagnify from "react-image-magnify";
 
 function Art({ art, correctArt }) {
@@ -20,7 +20,15 @@ function Art({ art, correctArt }) {
   return (
     <div className="art-container">
       {/* <div className="image-wrapper"> */}
-      {image && <img src={image.src} alt="artwork" className="artwork" />}
+      {/*image && <img src={image.src} alt="artwork" className="artwork" /> */}
+      {image && (
+        <Magnifier
+          src={image.src}
+          height={"max-content"}
+          width={"auto"}
+          mgShowOverflow={false}
+        />
+      )}
       {/* </div> */}
       <p>{correctArt.artistDisplayName}</p>
     </div>

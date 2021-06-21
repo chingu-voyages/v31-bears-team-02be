@@ -83,3 +83,10 @@
 .game-landing .button-container {
   text-align: center;
 }
+
+.magnifier-image {
+  width: auto;
+  max-height: 65vh;
+  height: auto;
+  padding: 1rem;
+}
