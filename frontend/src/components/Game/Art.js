@@ -25,7 +25,7 @@ function Art({ art, correctArt }) {
         <Magnifier
           src={image.src}
           height={"max-content"}
-          width={"auto"}
+          width={"max-content"}
           mgShowOverflow={false}
         />
       )}
