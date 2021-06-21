@@ -23,6 +23,7 @@ function Art({ art, correctArt }) {
       {/*image && <img src={image.src} alt="artwork" className="artwork" /> */}
       {image && (
         <Magnifier
+          className="artwork"
           src={image.src}
           height={"max-content"}
           width={"max-content"}
@@ -30,7 +31,7 @@ function Art({ art, correctArt }) {
         />
       )}
       {/* </div> */}
-      <p>{correctArt.artistDisplayName}</p>
+      <span>{correctArt.artistDisplayName}</span>
     </div>
   );
 }

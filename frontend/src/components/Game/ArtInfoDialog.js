@@ -17,7 +17,6 @@ const ArtInfoDialog = ({
   }
   return (
     <div className="art-info">
-      Art info Dialog
       <ul>
         <li>Title: {artInfo.title}</li>
 

@@ -24,7 +24,7 @@
   max-height: 65vh;
   /* display: block; */
   object-fit: contain;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .gameui-container {
