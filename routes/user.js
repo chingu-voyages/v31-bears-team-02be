@@ -7,9 +7,7 @@ const userRouter = express.Router();
 userRouter.route('/')
   .post(express.json(), UserController.createUser);
 
-/*
 userRouter.route('/auth')
   .post(express.json(), UserController.authenticateUser);
-*/
 
 export default userRouter;
