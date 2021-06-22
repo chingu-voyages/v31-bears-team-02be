@@ -31,6 +31,7 @@
 .magnifier-image {
   width: auto;
   max-height: 65vh;
+  max-width: 99vw;
   height: auto;
   /* padding: 1rem; */
 }
