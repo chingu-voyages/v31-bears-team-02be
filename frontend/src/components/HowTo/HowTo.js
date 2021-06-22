@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './HowTo.css';
+//import './HowTo.css';
 
 const HowTo = () => (
   <section className="how-to-play">

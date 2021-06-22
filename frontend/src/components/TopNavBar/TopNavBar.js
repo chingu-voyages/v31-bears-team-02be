@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSignedInUser } from '../App/authSlice';
 import { setModalOpen, setModalContent } from '../Modal/modalSlice';
 
-import "./TopNavBar.css";
+// import "./TopNavBar.css";
 
 import credentials from '../../services/credentials';
 import ls from '../../services/localStorage';
@@ -21,54 +21,53 @@ const TopNavBar = () => {
   const dispatch = useDispatch();
 
   return (
-    <header className="top-nav-header">
-      <h2>
+    <header className="flex p-4">
+      <h2 className="flex-none">
         <Link to="/">ArtGuessr</Link>
       </h2>
-      <nav>
-        {isAuthenticated ? (
-          <ul>
-            <li>
-              <Link to="/game">Play</Link>
-            </li>
-            <li>
-              <h3>{signedInUser}</h3>
-            </li>
-            <li>
-              <button type="button" onClick={() => {
-                token.removeItem();
-                dispatch(setSignedInUser(''));
-              }}>
-                Sign Out
-              </button>
-            </li>
-          </ul>
-        ) : (
-          <ul>
-            <li>
-              <Link to="/game">Play</Link>
-            </li>
-            <li>
-              <button
-                type="button"
-                onClick={() => {
-                  dispatch(setModalContent('SIGNUPFORM'));
+      <nav className="flex-auto">
+        <ul className="flex flex-row justify-end items-center text-lg space-x-2">
+          <li>
+            <Link to="/game">Play</Link>
+          </li>
+          {isAuthenticated ? (
+            <>
+              <li>
+                <h3>{signedInUser}</h3>
+              </li>
+              <li>
+                <button type="button" onClick={() => {
+                  token.removeItem();
+                  dispatch(setSignedInUser(''));
+                }}>
+                  Sign Out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    dispatch(setModalContent('SIGNUPFORM'));
+                    dispatch(setModalOpen());
+                  }}
+                >
+                  Sign Up
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => {
+                  dispatch(setModalContent('SIGNINFORM'));
                   dispatch(setModalOpen());
-                }}
-              >
-                Sign Up
-              </button>
-            </li>
-            <li>
-              <button type="button" onClick={() => {
-                dispatch(setModalContent('SIGNINFORM'));
-                dispatch(setModalOpen());
-              }}>
-                Sign in
-              </button>
-            </li>
-          </ul>
-        )}
+                }}>
+                  Sign in
+                </button>
+              </li>
+            </>
+          )}
+        </ul>
       </nav>
     </header >
   )

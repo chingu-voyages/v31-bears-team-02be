@@ -1,0 +1,99 @@
+@import url("https://unpkg.com/modern-css-reset/dist/reset.min.css");
+
+:root {
+  /* Typescale */
+  --ts-ratio: 2;
+  --ts-3: 0.5946035575rem;
+  --ts-2: 0.7071067812rem;
+  --ts-1: 0.8408964153rem;
+  --ts0: 1rem;
+  --ts1: 1.189207115rem;
+  --ts2: 1.4142135624rem;
+  --ts3: 1.6817928305rem;
+  --ts4: 2rem;
+  --ts5: 2.37841423rem;
+}
+
+html {
+  font-size: 100%; /*16px*/
+}
+
+body {
+  font-family: sans-serif;
+  line-height: var(--ts1);
+  font-size: var(--ts0);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 400;
+  line-height: calc(var(--ts-ratio) * 1em);
+  font-family: serif;
+}
+
+h1 {
+  font-size: var(--ts5);
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+h2 {
+  font-size: var(--ts4);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+h3 {
+  font-size: var(--ts3);
+  letter-spacing: 0px;
+}
+
+h4 {
+  font-size: var(--ts2);
+  letter-spacing: 0.25px;
+}
+
+h5 {
+  font-size: var(--ts1);
+  letter-spacing: 0px;
+}
+
+h6 {
+  font-size: calc(var(--ts0) + var(--ts-2));
+  font-weight: 500;
+  letter-spacing: 0.15px;
+}
+
+button {
+  font-weight: 500;
+  font-size: var(--ts-1);
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+}
+
+nav {
+  display: flex;
+}
+
+nav > ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+nav li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+nav li + li {
+  margin-inline-start: 1rem;
+}

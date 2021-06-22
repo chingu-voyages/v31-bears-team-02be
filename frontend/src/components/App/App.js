@@ -11,7 +11,6 @@ import NotFound from "../NotFound";
 import Modal from "../Modal/Modal";
 import Footer from "../Footer/Footer";
 import Game from "../Game/Game";
-import "./App.css";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess, logout } from './authSlice';
