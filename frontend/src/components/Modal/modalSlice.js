@@ -4,7 +4,7 @@ export const modalSlice = createSlice({
   name: 'modal',
   initialState: {
     modalOpen: false,
-    modalContent: <></>,
+    modalContent: '',
   },
   reducers: {
     setModalOpen: (state) => { state.modalOpen = true },

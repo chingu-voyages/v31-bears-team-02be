@@ -8,6 +8,7 @@ import fs from 'fs';
 // Api framework and related modules
 import express from 'express';
 import logger from 'morgan';
+import cors from 'cors';
 // Database query builder
 import knex from 'knex';
 
@@ -51,7 +52,8 @@ app.use(logger('common', {
 	// create a write stream in append mode and log to file 'access.log'
 	stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 }))
-
+// Handle cors
+app.use(cors())
 // Serve static files located in frontend/build
 app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 

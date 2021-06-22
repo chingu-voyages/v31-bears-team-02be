@@ -1,15 +1,10 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-
+import { setSignedInUser } from '../App/authSlice';
 import { setModalOpen, setModalContent } from '../Modal/modalSlice';
 
-import SignUpForm from "../SignUpForm";
-import SignInForm from "../SignInForm";
-
 import "./TopNavBar.css";
-
 
 import credentials from '../../services/credentials';
 import ls from '../../services/localStorage';
@@ -19,9 +14,10 @@ const token = {
   ...credentials({ username: 'demo', password: 'demo' })
 }
 
-const TopNavBar = ({ reload, setReload }) => {
+const TopNavBar = () => {
 
   const isAuthenticated = useSelector((state) => state.authorization.isAuthenticated);
+  const signedInUser = useSelector((state) => state.authorization.signedInUser)
   const dispatch = useDispatch();
 
   return (
@@ -36,12 +32,12 @@ const TopNavBar = ({ reload, setReload }) => {
               <Link to="/game">Play</Link>
             </li>
             <li>
-              <h3>Username</h3>
+              <h3>{signedInUser}</h3>
             </li>
             <li>
               <button type="button" onClick={() => {
                 token.removeItem();
-                setReload(!reload);
+                dispatch(setSignedInUser(''));
               }}>
                 Sign Out
               </button>
@@ -56,7 +52,7 @@ const TopNavBar = ({ reload, setReload }) => {
               <button
                 type="button"
                 onClick={() => {
-                  dispatch(setModalContent(<SignUpForm />));
+                  dispatch(setModalContent('SIGNUPFORM'));
                   dispatch(setModalOpen());
                 }}
               >
@@ -65,7 +61,7 @@ const TopNavBar = ({ reload, setReload }) => {
             </li>
             <li>
               <button type="button" onClick={() => {
-                dispatch(setModalContent(<SignInForm />));
+                dispatch(setModalContent('SIGNINFORM'));
                 dispatch(setModalOpen());
               }}>
                 Sign in
@@ -76,11 +72,6 @@ const TopNavBar = ({ reload, setReload }) => {
       </nav>
     </header >
   )
-};
-
-TopNavBar.propTypes = {
-  reload: PropTypes.bool.isRequired,
-  setReload: PropTypes.func.isRequired,
 };
 
 export default TopNavBar;

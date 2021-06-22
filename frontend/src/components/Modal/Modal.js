@@ -4,18 +4,32 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setModalClose } from './modalSlice';
 import './Modal.css';
 
+import SignUpForm from "../SignUpForm";
+import SignInForm from "../SignInForm";
+
+function resolveComponent(componentId) {
+  switch (componentId) {
+    case 'SIGNUPFORM':
+      return <SignUpForm />
+    case 'SIGNINFORM':
+      return <SignInForm />
+    default:
+      return <></>
+  }
+}
+
 const Modal = () => {
   const modalContent = useSelector((state) => state.modal.modalContent);
   const modalOpen = useSelector((state) => state.modal.modalOpen);
   const dispatch = useDispatch();
-  
+
   if (!modalOpen) return null;
 
   return createPortal(
     <div className="modal-overlay">
       <article className="modal">
         <button type="button" onClick={() => dispatch(setModalClose())}>Close</button>
-        {modalContent}
+        {resolveComponent(modalContent)}
       </article>
     </div>,
     document.getElementById('portal'),

@@ -9,11 +9,11 @@ import HomePage from "../HomePage";
 // 404 page
 import NotFound from "../NotFound";
 import Modal from "../Modal/Modal";
-import "./App.css";
 import Footer from "../Footer/Footer";
 import Game from "../Game/Game";
+import "./App.css";
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess, logout } from './authSlice';
 
 import credentials from '../../services/credentials';
@@ -25,24 +25,20 @@ const token = {
 }
 
 function App() {
-  const [reload, setReload] = React.useState(false);
-
   const dispatch = useDispatch();
-
+  const signedInUser = useSelector((state) => state.authorization.signedInUser);
+  
   React.useEffect(() => {
     if (token.getItem()) {
       dispatch(loginSuccess())
     } else {
       dispatch(logout())
     }
-  }, [reload]);
+  }, [signedInUser]);
 
   return (
     <div className="App">
-      <TopNavBar
-        reload={reload}
-        setReload={setReload}
-      />
+      <TopNavBar />
       <Switch>
         <PublicRoute
           exact
