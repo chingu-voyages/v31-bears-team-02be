@@ -6,8 +6,8 @@ import express from 'express';
 import knex from 'knex';
 const router = require('./routes');
 
-const PORT = process.env.HTTP_PORT || 4001;
-// const PORT = process.env.PORT || 4001;
+// const PORT = process.env.HTTP_PORT || 4001;
+const PORT = process.env.PORT || 4001;
 const app = express();
 
 app.set('db', knex({
