@@ -32,8 +32,7 @@ app.get('/', (req, res) => {
 app.get('/flower', (req, res) => {
   res.json({
     name: 'Dandelion',
-    colour: 'Blue-ish',
-		test: req.app.get('db').select('*')
+    colour: 'Blue-ish'
   });
 });
 

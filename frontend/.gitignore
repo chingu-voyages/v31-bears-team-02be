@@ -10,7 +10,7 @@
 
 # production
 # Commenting this to push build to remote repo
-#/build
+/build
 
 # misc
 .DS_Store
