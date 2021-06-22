@@ -13,42 +13,55 @@ import "./App.css";
 import Footer from "../Footer/Footer";
 import Game from "../Game/Game";
 
+import { useDispatch } from 'react-redux';
+import { loginSuccess, logout } from './authSlice';
+
+import credentials from '../../services/credentials';
+import ls from '../../services/localStorage';
+
+const token = {
+  ...ls('artguessr'),
+  ...credentials({ username: 'demo', password: 'demo' })
+}
+
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [reload, setReload] = React.useState(false);
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (token.getItem()) {
+      dispatch(loginSuccess())
+    } else {
+      dispatch(logout())
+    }
+  }, [reload]);
 
   return (
     <div className="App">
       <TopNavBar
-        onLogin={setIsAuthenticated}
-        isAuthenticated={isAuthenticated}
-        setModalOpen={setModalOpen}
-        modalOpen={modalOpen}
+        reload={reload}
+        setReload={setReload}
       />
       <Switch>
         <PublicRoute
           exact
           path={HOME}
           component={HomePage}
-          isAuthenticated={isAuthenticated}
         />
         <PrivateRoute
           exact
           path={USERHOME}
           component={HomePage}
-          isAuthenticated={isAuthenticated}
         />
         <Route path="/game" component={Game} />
         <PrivateRoute
           path="*"
           component={NotFound}
-          isAuthenticated={isAuthenticated}
         />
       </Switch>
       <Footer />
-      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <h2>Sign up</h2>
-      </Modal>
+      <Modal />
     </div>
   );
 }

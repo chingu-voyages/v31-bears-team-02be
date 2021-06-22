@@ -1,25 +1,25 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setModalClose } from './modalSlice';
 import './Modal.css';
 
-const Modal = ({ children, modalOpen, setModalOpen }) => {
+const Modal = () => {
+  const modalContent = useSelector((state) => state.modal.modalContent);
+  const modalOpen = useSelector((state) => state.modal.modalOpen);
+  const dispatch = useDispatch();
+  
   if (!modalOpen) return null;
+
   return createPortal(
     <div className="modal-overlay">
       <article className="modal">
-        <button type="button" onClick={(() => setModalOpen(false))}>Close</button>
-        {children}
+        <button type="button" onClick={() => dispatch(setModalClose())}>Close</button>
+        {modalContent}
       </article>
     </div>,
     document.getElementById('portal'),
   );
-};
-
-Modal.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.object, PropTypes.element, PropTypes.func]).isRequired,
-  modalOpen: PropTypes.bool.isRequired,
-  setModalOpen: PropTypes.func.isRequired,
 };
 
 export default Modal;
