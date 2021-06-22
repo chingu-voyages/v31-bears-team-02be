@@ -1,6 +1,6 @@
 // server.js
 //
-require(dotenv).config();
+require('dotenv').config();
 import path from 'path';
 import express from 'express';
 import knex from 'knex';
