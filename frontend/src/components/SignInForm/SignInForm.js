@@ -28,6 +28,7 @@ const SignInForm = () => {
         <label>
           Username
           <input
+            required
             type="text"
             onChange={({ target: { value } }) => {
               setUsername(value);
@@ -36,6 +37,7 @@ const SignInForm = () => {
         <label>
           Password
           <input
+            required
             type="text"
             onChange={({ target: { value } }) => {
               setPassword(value);
