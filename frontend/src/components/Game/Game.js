@@ -82,11 +82,7 @@ const Game = () => {
   }
 
   if (!gameStarted) {
-    return (
-      <div className="game-screen">
-        <GameLanding setGameStarted={setGameStarted} />
-      </div>
-    );
+    return <GameLanding setGameStarted={setGameStarted} />;
   }
 
   return (

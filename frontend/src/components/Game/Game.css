@@ -85,6 +85,11 @@
   grid-row: 1;
 }
 
+.game-landing-container {
+  width: 100%;
+  border: solid 2px black;
+}
+
 .game-landing h2 {
   text-align: center;
 }
@@ -138,15 +143,19 @@
   }
 
   .game-landing {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .button-container {
+    order: 2;
   }
 
   .demo-image {
     display: grid;
     height: max-content;
-    grid-row: 3;
-    grid-column: 1;
+    order: 3;
     place-items: center;
   }
 }
