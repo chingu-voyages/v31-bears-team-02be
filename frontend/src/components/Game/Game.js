@@ -74,11 +74,7 @@ const Game = () => {
   }, [roundCounter]);
 
   if (gameOver) {
-    return (
-      <div className="game-screen">
-        <GameOver roundHistory={roundHistory} />
-      </div>
-    );
+    return <GameOver roundHistory={roundHistory} />;
   }
 
   if (!gameStarted) {

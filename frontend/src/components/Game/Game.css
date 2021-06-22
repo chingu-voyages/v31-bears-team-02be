@@ -120,6 +120,16 @@
   max-height: 85vh;
 }
 
+.game-over {
+  height: 80vh;
+  text-align: center;
+  border: solid 2px black;
+  display: flex;
+  flex-direction: column;
+  gap: 5em;
+  justify-content: center;
+}
+
 @media only screen and (max-width: 500px) {
   .game-screen {
     grid-template-rows: 50vh 35vh 5vh;
