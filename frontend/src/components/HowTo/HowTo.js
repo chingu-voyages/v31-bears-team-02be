@@ -2,10 +2,10 @@ import * as React from 'react';
 //import './HowTo.css';
 
 const HowTo = () => (
-  <section className="how-to-play">
+  <section className="container mt-16 space-y-8 mx-auto">
     <h2>How to play:</h2>
-    <section>
-      <ul>
+    <section className="flex flex-row flex-wrap space-y-8 lg:flex-nowrap lg:space-y-0">
+      <ul className="p-4 list-disc items-center">
         <li>
           Each game consists of ten rounds.
         </li>

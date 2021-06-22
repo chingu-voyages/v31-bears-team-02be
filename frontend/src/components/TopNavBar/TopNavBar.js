@@ -21,12 +21,12 @@ const TopNavBar = () => {
   const dispatch = useDispatch();
 
   return (
-    <header className="flex p-4">
+    <header className="flex p-6 h-24 lg:container lg:mx-auto">
       <h2 className="flex-none">
         <Link to="/">ArtGuessr</Link>
       </h2>
       <nav className="flex-auto">
-        <ul className="flex flex-row justify-end items-center text-lg space-x-2">
+        <ul className="flex flex-row justify-end items-center text-lg md:text-xl space-x-3">
           <li>
             <Link to="/game">Play</Link>
           </li>

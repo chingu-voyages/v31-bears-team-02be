@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const Footer = () => (
-  <footer>
+  <footer className="mt-16 container mx-auto space-y-6">
     <h2>Contact Us</h2>
 
     <p>
@@ -12,7 +12,7 @@ const Footer = () => (
       31st voyage.
     </p>
     <p>Our team:</p>
-    <ul>
+    <ul className="flex flex-row space-x-8">
       <li>Jim</li>
       <li>Anjana</li>
       <li>Kapre</li>
@@ -21,7 +21,7 @@ const Footer = () => (
       <li>Michael</li>
       <li>Joel</li>
     </ul>
-    <p>
+    <p className="text-center">
       © Chingu v31 bears-team-02
     </p>
   </footer>
