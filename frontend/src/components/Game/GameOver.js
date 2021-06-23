@@ -6,13 +6,13 @@ const GameOver = ({ roundHistory, allCorrectArt }) => {
 
   const allImages = allCorrectArt.map((art) => {
     return (
-      <a href={art.objectURL} target="_blank" rel="noreferrer">
-        <div key={art.objectID} className="image-container">
-          <div className="frame">
+      <div key={art.objectID} className="image-container">
+        <div className="frame">
+          <a href={art.objectURL} target="_blank" rel="noreferrer">
             <img src={art.primaryImage} alt="correct art" />
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
     );
   });
 
