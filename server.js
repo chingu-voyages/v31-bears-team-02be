@@ -75,10 +75,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/flower', (req, res) => {
-	res.json({
-		name: 'Dandelion',
-		colour: 'Blue-ish',
-	});
+  res.json({
+    name: 'Dandelion',
+    colour: 'Blue-ish',
+    env: process.env, 		// for testing
+		port: PORT						// for testing
+  });
 });
 
 // API routes
