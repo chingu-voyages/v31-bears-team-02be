@@ -41,7 +41,7 @@ const SignInForm = () => {
             throw new Error('Authentication error, try again later.')
           } else {
             // Store token in local storage
-            user.setItem(token);
+            user.setItem(token.authToken);
             // Grab username from stored token key
             const { sub } = await user.decodeUserData();
             // Save username of signed up user in state

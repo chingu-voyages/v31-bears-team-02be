@@ -82,7 +82,7 @@ const SignUpForm = () => {
               throw new Error('Authentication error, try again later.')
             } else {
               // Store token in local storage
-              newUser.setItem(newToken);
+              newUser.setItem(newToken.authToken);
               // Grab username from stored token key
               const { sub } = await newUser.decodeUserData();
               // Save username of signed up user in state
