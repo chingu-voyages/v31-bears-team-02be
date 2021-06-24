@@ -27,13 +27,16 @@ function App() {
   const dispatch = useDispatch();
   const signedInUser = useSelector((state) => state.authorization.signedInUser);
   
+  /* When App component mounts, check for token in local storage,
+  if found, dispatch callback to set authenticated state to 'true',
+  else set to 'false'. Has 'signedInUser' state value as dependency */ 
   React.useEffect(() => {
     if (token.getItem()) {
       dispatch(loginSuccess())
     } else {
       dispatch(logout())
     }
-  }, [signedInUser]);
+  }, [signedInUser, dispatch]);
 
   return (
     <div className="App">

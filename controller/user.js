@@ -15,7 +15,7 @@ class UserController {
 				});
 			}
 			// Check that password is valid
-      const passwordError = UserModel.validatePassword(password);
+      const passwordError = UserModel.invalidPassword(password);
       if (passwordError) {
         return res.status(400).json({
           error: passwordError,

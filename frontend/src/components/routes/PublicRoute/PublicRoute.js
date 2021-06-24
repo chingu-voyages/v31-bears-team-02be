@@ -2,17 +2,17 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
-import { USERHOME } from '../../../config/routes';
+import { USER } from '../../../config/routes';
 import { useSelector } from 'react-redux';
 
 const PublicRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = useSelector((state) => state.authorization.isAuthenticated);
-
+  const signedInUser = useSelector((state) => state.authorization.signedInUser);
   return (
     <Route
       {...rest}
       // TODO: Review redirect for user on sign in
-      render={(props) => (isAuthenticated ? <Redirect to={USERHOME} /> : <Component {...props} />)}
+      render={(props) => (isAuthenticated ? <Redirect to={`${USER}/${signedInUser}`} /> : <Component {...props} />)}
     />
   )
 };

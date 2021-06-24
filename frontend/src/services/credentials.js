@@ -23,7 +23,7 @@ const credentials = ({ username = '', password = '' } = {}) => ({
       const data = await res.json();
       return data;
     } catch (error) {
-      console.error(error);
+      return error;
     }
   },
   async postNewUser () {
@@ -43,7 +43,7 @@ const credentials = ({ username = '', password = '' } = {}) => ({
       const data = await res.json();
       return data;
     } catch (error) {
-      console.error(error);
+      return error;
     }
   },
 })
