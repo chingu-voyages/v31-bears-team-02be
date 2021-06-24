@@ -47,13 +47,25 @@ app.use(logger((NODE_ENV === 'production') ? 'common' : 'dev', {
 	// Skip logging when run in test enviroment
 	skip: () => NODE_ENV === 'test',
 }));
-// Append logging to file
-app.use(logger('common', {
-	// create a write stream in append mode and log to file 'access.log'
-	stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-}))
+
+if (NODE_ENV === 'production') {
+	// Append logging to file
+	app.use(logger('common', {
+		// create a write stream in append mode and log to file 'express-access.log'
+		stream: fs.createWriteStream(path.join(__dirname, '..', '..', 'log', 'express-access.log'), { flags: 'a' })
+	}))
+} else {
+	// Append logging to file
+	app.use(logger('common', {
+		// create a write stream in append mode and log to file 'access.log'
+		// pwd in production is /var/app/current, set log file address to '../../log/' so access.log is saved in /var/log/
+		stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+	}))
+}
+
 // Handle cors
 app.use(cors())
+
 // Serve static files located in frontend/build
 app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
