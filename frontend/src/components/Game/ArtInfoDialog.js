@@ -2,7 +2,6 @@ const ArtInfoDialog = ({
   setRoundCounter,
   setAnswerChosen,
   artInfo,
-  setArt,
   setCorrectArt,
   setGameOver,
   roundCounter,
