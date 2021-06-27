@@ -4,10 +4,7 @@ import { useEffect, useState } from "react";
 const GameUI = ({
   correctArt,
   roundCounter,
-  setRoundCounter,
   setAnswerChosen,
-  answerChosen,
-  setArt,
   roundArt,
   roundHistory,
   setRoundHistory,

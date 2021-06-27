@@ -108,9 +108,7 @@ const Game = () => {
               correctArt={correctArt}
               roundArt={roundArt}
               roundCounter={roundCounter}
-              setRoundCounter={setRoundCounter}
               setAnswerChosen={setAnswerChosen}
-              answerChosen={answerChosen}
               roundHistory={roundHistory}
               setRoundHistory={setRoundHistory}
             />
