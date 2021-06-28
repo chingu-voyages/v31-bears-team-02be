@@ -121,13 +121,43 @@
 }
 
 .game-over {
-  height: 80vh;
+  /* height: 80vh; */
   text-align: center;
   border: solid 2px black;
-  display: flex;
   flex-direction: column;
   gap: 5em;
   justify-content: center;
+}
+
+.correct-art-container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-auto-rows: 1fr;
+  grid-auto-flow: dense;
+  margin: 20px;
+}
+
+.image-container {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  box-shadow: 3px 3px 5px rgb(92, 92, 92);
+  background-image: url("https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX7002044.jpg");
+  background-size: cover;
+  padding: 1rem;
+  background-color: gray;
+  background-repeat: no-repeat;
+}
+
+.image-container img {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* border: solid 2px black; */
 }
 
 @media only screen and (max-width: 500px) {

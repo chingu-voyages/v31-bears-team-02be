@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Art from "./Art";
-import "./Game.css";
+import "./Game.scss";
 import GameUI from "./GameUI";
 import ArtInfoDialog from "./ArtInfoDialog";
 import GameOver from "./GameOver";
 import GameLanding from "./GameLanding";
+
 
 const Game = () => {
   const [art, setArt] = useState(null);
@@ -18,6 +19,7 @@ const Game = () => {
   const [gameOver, setGameOver] = useState(false);
   const [artImgLoaded, setArtImgLoaded] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [allCorrectArt, setAllCorrectArt] = useState([]);
 
   useEffect(() => {
     const url =
@@ -67,6 +69,9 @@ const Game = () => {
       const artImg = new Image();
       artImg.src = newCorrectArt.primaryImageSmall;
       artImg.onload = () => setArtImgLoaded(true);
+      const newAllCorrectArt = [...allCorrectArt];
+      newAllCorrectArt.push(newCorrectArt);
+      setAllCorrectArt(newAllCorrectArt);
 
       setCorrectArt(newCorrectArt);
     }
@@ -74,7 +79,9 @@ const Game = () => {
   }, [roundCounter]);
 
   if (gameOver) {
-    return <GameOver roundHistory={roundHistory} />;
+    return (
+      <GameOver allCorrectArt={allCorrectArt} roundHistory={roundHistory} />
+    );
   }
 
   if (!gameStarted) {

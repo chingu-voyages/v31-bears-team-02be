@@ -14,6 +14,7 @@
     "react-magnifier": "^3.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "sass": "^1.35.1",
     "web-vitals": "^1.1.2"
   },
   "proxy": "http://localhost:4001",
