@@ -1,6 +1,6 @@
-import xss from 'xss';
-import path from 'path';
-import UserModel from '../dao/user';
+const xss = require('xss');
+const path = require('path');
+const UserModel = require('../dao/user');
 
 class UserController {
 	async createUser(req, res, next) {
@@ -74,4 +74,4 @@ class UserController {
 	}
 }
 
-export default new UserController();
+module.exports = new UserController();

@@ -1,5 +1,4 @@
-// import express from 'express';
-import UserController from "../controller/user";
+const UserController = require("../controller/user");
 
 const express = require("express");
 
@@ -10,5 +9,4 @@ userRouter.route("/").post(express.json(), UserController.createUser);
 // This is route '/user/auth'
 userRouter.route("/auth").post(express.json(), UserController.authenticateUser);
 
-// export default userRouter;
 module.exports = userRouter;
