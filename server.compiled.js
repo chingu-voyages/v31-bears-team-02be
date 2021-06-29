@@ -1,6 +1,13 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.app = void 0;
+
 var _path = _interopRequireDefault(require("path"));
+
+var _fs = _interopRequireDefault(require("fs"));
 
 var _express = _interopRequireDefault(require("express"));
 
@@ -40,10 +47,28 @@ app.get('/flower', function (req, res) {
     port: PORT // for testing
 
   });
+}); // API routes
+
+app.use('/user', _user["default"]); // Error handling
+
+app.use(function (error, req, res, next) {
+  var response;
+
+  if (NODE_ENV === 'production') {
+    response = {
+      error: error.message
+    };
+  } else {
+    console.error(error);
+    response = {
+      error: error.message
+    };
+  }
+
+  res.status(500).json(response);
 });
 app.listen(PORT, function () {
   console.log("Server listening at port ".concat(PORT, "."));
 }); // express.json() is a built-in middleware, parses incoming JSON requests, returns Object
-
-app.use(_express["default"].json());
-app.use(router);
+// app.use(express.json());
+// app.use(router);
