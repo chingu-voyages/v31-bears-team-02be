@@ -7,10 +7,13 @@ const ArtInfoDialog = ({
   roundCounter,
 }) => {
   function handleClick(e) {
-    setRoundCounter((round) => round + 1);
+    setRoundCounter((round) => {
+      localStorage.setItem("artRoundCounter", round + 1);
+      return round + 1;
+    });
     setAnswerChosen(false);
     setCorrectArt(null);
-    if (roundCounter === 10) {
+    if (roundCounter > 9) {
       setGameOver(true);
     }
   }
