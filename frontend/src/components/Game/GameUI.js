@@ -39,6 +39,7 @@ const GameUI = ({
       const newRoundHistory = [...roundHistory];
       newRoundHistory[roundCounter - 1] = "❌";
       setRoundHistory(newRoundHistory);
+      localStorage.setItem("artRoundHistory", JSON.stringify(newRoundHistory));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timer, setAnswerChosen]);
@@ -51,12 +52,14 @@ const GameUI = ({
       const newRoundHistory = [...roundHistory];
       newRoundHistory[roundCounter - 1] = "✔";
       setRoundHistory(newRoundHistory);
+      localStorage.setItem("artRoundHistory", JSON.stringify(newRoundHistory));
     } else {
       console.log("wrong!", e.target.value);
       // replace roundHistory[roundCounter] with 'wrong'
       const newRoundHistory = [...roundHistory];
       newRoundHistory[roundCounter - 1] = "❌";
       setRoundHistory(newRoundHistory);
+      localStorage.setItem("artRoundHistory", JSON.stringify(newRoundHistory));
     }
     setAnswerChosen((answer) => !answer);
   };

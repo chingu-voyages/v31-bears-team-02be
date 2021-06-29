@@ -1,5 +1,13 @@
 const GameOver = ({ roundHistory, allCorrectArt }) => {
   console.log("allCorrectArt: ", allCorrectArt);
+
+  // clear all localStorage before starting a new game
+  localStorage.removeItem("art");
+  localStorage.removeItem("artRoundHistory");
+  localStorage.removeItem("artRoundCounter");
+  localStorage.removeItem("artAllCorrectArt");
+  localStorage.removeItem("artStarted");
+
   function reloadPage() {
     window.location.reload();
   }

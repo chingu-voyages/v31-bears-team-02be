@@ -1,6 +1,7 @@
-const GameLanding = ({ setGameStarted, gameStarted }) => {
+const GameLanding = ({ setGameStarted }) => {
   function toggleStart() {
     setGameStarted((state) => !state);
+    localStorage.setItem("artStarted", "true");
   }
   return (
     <div className="game-landing-container">
@@ -31,7 +32,9 @@ const GameLanding = ({ setGameStarted, gameStarted }) => {
         </div>
 
         <div className="button-container">
-          <button onClick={toggleStart}>Start!</button>
+          <button onClick={toggleStart}>
+            {localStorage.getItem("artStarted") ? "Continue" : "Start!"}
+          </button>
         </div>
       </div>
     </div>
