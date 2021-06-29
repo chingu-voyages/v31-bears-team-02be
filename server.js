@@ -24,21 +24,6 @@ app.set('db', knex({
 app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
 
-app.get('/', (req, res) => {
-  res.send('just gonna send it');
-});
-
-
-app.get('/flower', (req, res) => {
-  res.json({
-    name: 'Dandelion',
-    colour: 'Blue-ish',
-    env: process.env, 		// for testing
-		port: PORT						// for testing
-  });
-});
-
-
 app.listen(PORT, () => {
   console.log(`Server listening at port ${PORT}.`);
 });

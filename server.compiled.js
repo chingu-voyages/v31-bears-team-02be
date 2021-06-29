@@ -28,19 +28,6 @@ app.set('db', (0, _knex["default"])({
   }
 }));
 app.use(_express["default"]["static"](_path["default"].join(__dirname, 'frontend', 'build')));
-app.get('/', function (req, res) {
-  res.send('just gonna send it');
-});
-app.get('/flower', function (req, res) {
-  res.json({
-    name: 'Dandelion',
-    colour: 'Blue-ish',
-    env: process.env,
-    // for testing
-    port: PORT // for testing
-
-  });
-});
 app.listen(PORT, function () {
   console.log("Server listening at port ".concat(PORT, "."));
 }); // express.json() is a built-in middleware, parses incoming JSON requests, returns Object
