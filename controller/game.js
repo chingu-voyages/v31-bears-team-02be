@@ -2,13 +2,17 @@ const gameModel = require('../dao/game');
 const userGameModel = require('../dao/userGame');
 
 class GameController {
-	async createGame(req, res) {
+	// also implicitly passed in next (callback), and err
+	// next is a middleware function
+	async createGame(req, res, next) {			
 		try {
 			
 			// deconstruct / get userId out of request
 			const { userId, artworks } = req.body					// artworks == [ ints ]
 
 			// what is app? / what is db? 
+			// app == .get method is part of express/built in
+			// db == value of key 'db' (see server.js in app.set method). db = obj that represents the database
 			const db = req.app.get('db');
 
 			// create new game obj in db

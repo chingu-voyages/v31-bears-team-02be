@@ -20,14 +20,14 @@ class GameDAO {
 
 		const total_score = 0;
 
-		// destructure game after creating new game
-		const [ game ] = await db('game')				// ? singular even though table name plural?
-			.insert({ 														// knex syntax
-				total_score,
+		// destructure game after creating new game because knex will return as a 2d array
+		const [ game ] = await db(this.gamesTable)	
+			.insert({ 																// knex syntax
+				total_score,	
 				artworks
 			})
-			.into(this.gamesTable)
-			.returning('*');
+			// .into(this.gamesTable)									// redundant if passed table name in db('users')
+			.returning('*');													// return entire row/object
 
 		return game;													
 	}

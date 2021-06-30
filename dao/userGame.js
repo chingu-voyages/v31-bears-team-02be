@@ -20,12 +20,12 @@ class UserGameDAO {
 	async createUserGame(db, userId, gameId) {
 
 		// destructure user_game after creating new user_game obj
-		const [ user_game ] = await db('user_game')									// ? singular even though table name is plural?
+		const [ user_game ] = await db(this.userGamesTable)									
 			.insert({ 		// knex syntax:
 				userId,
 				gameId,
 			})
-			.into(this.userGamesTable)
+			// .into(this.userGamesTable)														// redundant if passed table name in db('user_games')
 			.returning('*');
 		
 		return user_game;
