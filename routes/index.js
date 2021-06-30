@@ -8,7 +8,7 @@ const GameController = require('../controller/game');
 
 router.post('/user', UserController.createUser);
 
-router.get('/game', GameController.createGame);
+router.post('/game', GameController.createGame);
 
 
 // TODO
