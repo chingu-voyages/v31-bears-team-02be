@@ -20,7 +20,7 @@ class GameController {
 			const game = await gameModel.createGame(db, artworks);
 
 			// create new user_game obj in db. Why do model methods have to take in db?
-			const userGame = await userGameModel.createUserGame(db, userId, gameId);
+			const userGame = await userGameModel.createUserGame(db, userId, game.game_id);
 
 			// send gameId back to front end
 			res.status(201).json(game.game_id);						// ? correct key?

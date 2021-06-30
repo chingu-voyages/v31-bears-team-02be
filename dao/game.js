@@ -54,4 +54,4 @@ class GameDAO {
 }
 
 
-export default new GameDAO();
+module.exports = new GameDAO();
