@@ -5,14 +5,13 @@ const router = express.Router();
 
 const UserController = require('../controller/user');
 const GameController = require('../controller/game');
+const LeaderboardController = require('../controller/leaderboard');
 
 router.post('/user', UserController.createUser);
 
 router.post('/game', GameController.createGame);
 
-
-// TODO
-// router.get('/leaderboard', );
+router.get('/leaderboard', LeaderboardController.getLeaderboard);
 
 
 // For Testing
