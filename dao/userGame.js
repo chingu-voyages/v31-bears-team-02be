@@ -1,5 +1,5 @@
-import knex from 'knex';
-import config from '../config';
+const knex = require('knex');
+const config = require("../config");
 
 
 // User Game- Data Access Object (used to interface w/ db)
@@ -34,4 +34,4 @@ class UserGameDAO {
 }
 
 
-export default new UserGameDAO();
+module.exports = new UserGameDAO();

@@ -1,6 +1,3 @@
-import knex from 'knex';
-import config from '../config';
-import game from '../controller/game';
 
 
 // Game Data Access Object (used to interface w/ db)

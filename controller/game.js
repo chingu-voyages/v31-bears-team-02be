@@ -1,6 +1,7 @@
 const gameModel = require('../dao/game');
 const userGameModel = require('../dao/userGame');
 
+
 class GameController {
 	// also implicitly passed in next (callback), and err
 	// next is a middleware function
