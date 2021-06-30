@@ -24,6 +24,23 @@ class GameController {
 			console.log(err);
 		}
 	}
+
+
+	async updateGame(req, res) {
+		try {
+
+			const { userId, gameId, updated_total_score } = req.body;
+
+			const db = req.app.get('db');
+
+			const game = await gameModel.updateGame(db, userId, gameId, updated_total_score);
+
+			res.status(201).json(game);
+
+		} catch (err) {
+			console.log(err);
+		}
+	}
 }
 
 module.exports = new GameController();
