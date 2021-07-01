@@ -16,8 +16,7 @@ const ArtInfoDialog = ({
     }
   }
   return (
-    <>
-      Art info Dialog
+    <div className="art-info">
       <ul>
         <li>Title: {artInfo.title}</li>
 
@@ -35,7 +34,7 @@ const ArtInfoDialog = ({
         </li>
       </ul>
       <button onClick={handleClick}>next</button>
-    </>
+    </div>
   );
 };
 

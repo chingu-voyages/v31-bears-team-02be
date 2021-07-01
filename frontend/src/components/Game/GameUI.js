@@ -1,5 +1,4 @@
 import Timer from "./Timer";
-import RoundCounter from "./RoundCounter";
 import ChoiceButton from "./ChoiceButton";
 import { useEffect, useState } from "react";
 const GameUI = ({
@@ -44,6 +43,7 @@ const GameUI = ({
       newRoundHistory[roundCounter - 1] = "❌";
       setRoundHistory(newRoundHistory);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timer, setAnswerChosen]);
 
   const handleClick = (e) => {
@@ -78,7 +78,7 @@ const GameUI = ({
     <div className="gameui-container">
       <Timer timer={timer}></Timer>
       <div className="multiple-choice">{artButtons}</div>
-      <RoundCounter roundCounter={roundCounter}></RoundCounter>
+      {/* <RoundCounter roundCounter={roundCounter}></RoundCounter> */}
     </div>
   );
 };
