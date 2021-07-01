@@ -14,6 +14,7 @@ import knex from 'knex';
 
 // Express Routes
 import userRouter from './routes/user';
+import artworkRouter from './routes/artwork';
 
 // Import globals from enviroment variables
 import config from './config';
@@ -85,6 +86,7 @@ app.get('/flower', (req, res) => {
 
 // API routes
 app.use('/user', userRouter);
+app.use('/artwork', artworkRouter);
 
 // Error handling
 app.use((error, req, res, next) => {
