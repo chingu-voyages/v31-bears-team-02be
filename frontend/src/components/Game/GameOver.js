@@ -12,10 +12,16 @@ const GameOver = ({ roundHistory, allCorrectArt }) => {
     window.location.reload();
   }
 
-  const allImages = allCorrectArt.map((art) => {
+  const allImages = allCorrectArt.map((art, i) => {
     return (
       <div key={art.objectID} className="image-container">
-        <div className="art-frame">
+        <div
+          className={
+            roundHistory[i] === "✔"
+              ? "art-frame correct"
+              : "art-frame incorrect"
+          }
+        >
           <a href={art.objectURL} target="_blank" rel="noreferrer">
             <img src={art.primaryImage} alt="correct art" />
           </a>
