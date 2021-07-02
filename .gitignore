@@ -5,8 +5,8 @@
 !.elasticbeanstalk/*.global.yml
 
 artguessr.pem
-
 .env
-postgrator-dev.config.js
 access.log
 /node_modules
+postgrator-dev.config.js
+
