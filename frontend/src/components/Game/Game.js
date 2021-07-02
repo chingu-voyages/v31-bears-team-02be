@@ -27,6 +27,7 @@ const Game = () => {
   const [allCorrectArt, setAllCorrectArt] = useState(
     JSON.parse(localStorage.getItem("artAllCorrectArt")) || []
   );
+  const [gameState, setGameState] = useState({});
 
   useEffect(() => {
     if (localStorage.getItem("art") === null) {
@@ -85,6 +86,7 @@ const Game = () => {
       const artImg = new Image();
       artImg.src = newCorrectArt.primaryImageSmall;
       artImg.onload = () => setArtImgLoaded(true);
+
       const newAllCorrectArt = [...allCorrectArt];
       newAllCorrectArt[roundCounter - 1] = newCorrectArt;
       setAllCorrectArt(newAllCorrectArt);
