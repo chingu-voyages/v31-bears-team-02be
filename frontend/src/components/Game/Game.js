@@ -7,30 +7,46 @@ import GameOver from "./GameOver";
 import GameLanding from "./GameLanding";
 
 const Game = () => {
-  const [art, setArt] = useState(
-    JSON.parse(localStorage.getItem("art")) || null
-  );
+  // const [art, setArt] = useState(
+  //   JSON.parse(localStorage.getItem("art")) || null
+  // );
+  const [art, setArt] = useState(null);
   const [correctArt, setCorrectArt] = useState(null);
-  const [roundCounter, setRoundCounter] = useState(
-    Number(localStorage.getItem("artRoundCounter")) || 0
-  );
+  const [roundCounter, setRoundCounter] = useState(0);
   const [answerChosen, setAnswerChosen] = useState(false);
   const [roundArt, setRoundArt] = useState(null);
-  const [roundHistory, setRoundHistory] = useState(
-    JSON.parse(localStorage.getItem("artRoundHistory")) || [
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-    ]
-  );
+  const [roundHistory, setRoundHistory] = useState([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  ]);
   const [gameOver, setGameOver] = useState(false);
   const [artImgLoaded, setArtImgLoaded] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  const [allCorrectArt, setAllCorrectArt] = useState(
-    JSON.parse(localStorage.getItem("artAllCorrectArt")) || []
+  const [allCorrectArt, setAllCorrectArt] = useState([]);
+  // const [roundCounter, setRoundCounter] = useState(
+  //   Number(localStorage.getItem("artRoundCounter")) || 0
+  // );
+  // const [roundHistory, setRoundHistory] = useState(
+  //   JSON.parse(localStorage.getItem("artRoundHistory")) || [
+  //     1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  //   ]
+  // );
+  // const [allCorrectArt, setAllCorrectArt] = useState(
+  //   JSON.parse(localStorage.getItem("artAllCorrectArt")) || []
+  // );
+  const [gameState, setGameState] = useState(
+    JSON.parse(localStorage.getItem("gameState")) || null
   );
-  const [gameState, setGameState] = useState({});
 
   useEffect(() => {
-    if (localStorage.getItem("art") === null) {
+    if (gameState) {
+      setArt(gameState[art]);
+      setCorrectArt(gameState[correctArt]);
+      setRoundCounter(gameState[roundCounter]);
+      setAnswerChosen(gameState[answerChosen]);
+      setRoundArt(gameState[roundArt]);
+      setRoundHistory(gameState[roundHistory]);
+      setGameOver(gameState[gameOver]);
+    } else {
       const url =
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=11&q=painting";
       const artFetch = async () => {
@@ -60,9 +76,9 @@ const Game = () => {
         );
 
         setArt(randomArt);
-        localStorage.setItem("art", JSON.stringify(randomArt));
+        //localStorage.setItem("art", JSON.stringify(randomArt));
         setRoundCounter((round) => round + 1);
-        localStorage.setItem("artRoundCounter", "1");
+        //localStorage.setItem("artRoundCounter", "1");
       };
       artFetch();
     }
@@ -97,6 +113,20 @@ const Game = () => {
 
       setCorrectArt(newCorrectArt);
     }
+
+    setGameState({
+      art,
+      correctArt,
+      roundCounter,
+      answerChosen,
+      roundArt,
+      roundHistory,
+      gameOver,
+    });
+    
+    const newGameState;
+    localStorage.setItem("gameState", JSON.stringify(gameState));
+    console.log(JSON.parse(localStorage.getItem("gameState")));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roundCounter]);
 
