@@ -1,7 +1,6 @@
 const GameLanding = ({ setGameStarted }) => {
   function toggleStart() {
     setGameStarted((state) => !state);
-    //localStorage.setItem("artStarted", "true");
   }
   return (
     <div className="game-landing-container">
