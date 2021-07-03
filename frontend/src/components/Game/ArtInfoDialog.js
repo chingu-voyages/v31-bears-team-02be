@@ -8,7 +8,6 @@ const ArtInfoDialog = ({
 }) => {
   function handleClick(e) {
     setRoundCounter((round) => {
-      //localStorage.setItem("artRoundCounter", round + 1);
       return round + 1;
     });
     setAnswerChosen(false);
