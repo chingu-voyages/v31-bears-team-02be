@@ -19,6 +19,8 @@ var _knex = _interopRequireDefault(require("knex"));
 
 var _user = _interopRequireDefault(require("./routes/user"));
 
+var _game = _interopRequireDefault(require("./routes/game"));
+
 var _config = _interopRequireDefault(require("./config"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -103,7 +105,8 @@ app.get('/flower', function (req, res) {
   });
 }); // API routes
 
-app.use('/user', _user["default"]); // Error handling
+app.use('/user', _user["default"]);
+app.use('/game', _game["default"]); // Error handling
 
 app.use(function (error, req, res, next) {
   var response;
