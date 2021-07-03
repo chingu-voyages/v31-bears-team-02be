@@ -6,10 +6,14 @@ import ArtInfoDialog from "./ArtInfoDialog";
 import GameOver from "./GameOver";
 import GameLanding from "./GameLanding";
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 const Game = () => {
-  // const [art, setArt] = useState(
-  //   JSON.parse(localStorage.getItem("art")) || null
-  // );
   const [art, setArt] = useState(null);
   const [correctArt, setCorrectArt] = useState(null);
   const [roundCounter, setRoundCounter] = useState(0);
@@ -22,30 +26,20 @@ const Game = () => {
   const [artImgLoaded, setArtImgLoaded] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [allCorrectArt, setAllCorrectArt] = useState([]);
-  // const [roundCounter, setRoundCounter] = useState(
-  //   Number(localStorage.getItem("artRoundCounter")) || 0
-  // );
-  // const [roundHistory, setRoundHistory] = useState(
-  //   JSON.parse(localStorage.getItem("artRoundHistory")) || [
-  //     1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-  //   ]
-  // );
-  // const [allCorrectArt, setAllCorrectArt] = useState(
-  //   JSON.parse(localStorage.getItem("artAllCorrectArt")) || []
-  // );
   const [gameState, setGameState] = useState(
     JSON.parse(localStorage.getItem("gameState")) || null
   );
 
   useEffect(() => {
     if (gameState) {
-      setArt(gameState[art]);
-      setCorrectArt(gameState[correctArt]);
-      setRoundCounter(gameState[roundCounter]);
-      setAnswerChosen(gameState[answerChosen]);
-      setRoundArt(gameState[roundArt]);
-      setRoundHistory(gameState[roundHistory]);
-      setGameOver(gameState[gameOver]);
+      setArt(gameState.art);
+      setCorrectArt(gameState.correctArt);
+      setRoundCounter(gameState.roundCounter);
+      setAnswerChosen(gameState.answerChosen);
+      setRoundArt(gameState.roundArt);
+      setRoundHistory(gameState.roundHistory);
+      setGameOver(gameState.gameOver);
+      setAllCorrectArt(gameState.allCorrectArt);
     } else {
       const url =
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=11&q=painting";
@@ -76,9 +70,7 @@ const Game = () => {
         );
 
         setArt(randomArt);
-        //localStorage.setItem("art", JSON.stringify(randomArt));
         setRoundCounter((round) => round + 1);
-        //localStorage.setItem("artRoundCounter", "1");
       };
       artFetch();
     }
@@ -88,15 +80,12 @@ const Game = () => {
     if (art) {
       if (art.length === 0) return;
 
-      // save art array to localStorage
-      const artStorage = [...art];
-      localStorage.setItem("art", JSON.stringify(artStorage));
-
       setArtImgLoaded(false);
       const newRoundArt = art.slice(0, 4);
+      const newCorrectArt = newRoundArt[0];
+      shuffleArray(newRoundArt);
       setRoundArt(newRoundArt);
       setArt((art) => art.slice(4));
-      const newCorrectArt = newRoundArt[Math.floor(Math.random() * 4)];
 
       // Preload image before rendering game ui
       const artImg = new Image();
@@ -106,15 +95,11 @@ const Game = () => {
       const newAllCorrectArt = [...allCorrectArt];
       newAllCorrectArt[roundCounter - 1] = newCorrectArt;
       setAllCorrectArt(newAllCorrectArt);
-      localStorage.setItem(
-        "artAllCorrectArt",
-        JSON.stringify(newAllCorrectArt)
-      );
 
       setCorrectArt(newCorrectArt);
     }
 
-    setGameState({
+    const newGameState = {
       art,
       correctArt,
       roundCounter,
@@ -122,11 +107,14 @@ const Game = () => {
       roundArt,
       roundHistory,
       gameOver,
-    });
-    
-    const newGameState;
-    localStorage.setItem("gameState", JSON.stringify(gameState));
-    console.log(JSON.parse(localStorage.getItem("gameState")));
+      allCorrectArt,
+    };
+
+    setGameState(newGameState);
+
+    localStorage.setItem("gameState", JSON.stringify(newGameState));
+
+    console.log("game state:", JSON.parse(localStorage.getItem("gameState")));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roundCounter]);
 
