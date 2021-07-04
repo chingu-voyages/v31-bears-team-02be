@@ -33,12 +33,20 @@ const GameUI = ({
     };
   }, []);
 
+  function answerHandle(valid) {
+    const newRoundHistory = [...roundHistory];
+    if (valid) {
+      newRoundHistory[roundCounter - 1] = "✔";
+    } else {
+      newRoundHistory[roundCounter - 1] = "❌";
+    }
+    setRoundHistory(newRoundHistory);
+    setAnswerChosen(true);
+  }
+
   useEffect(() => {
     if (timer === 0) {
-      setAnswerChosen(true);
-      const newRoundHistory = [...roundHistory];
-      newRoundHistory[roundCounter - 1] = "❌";
-      setRoundHistory(newRoundHistory);
+      answerHandle(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timer, setAnswerChosen]);
@@ -46,19 +54,11 @@ const GameUI = ({
   const handleClick = (e) => {
     if (e.target.value === correctArt.artistDisplayName) {
       console.log("correct!", e.target.value);
-
-      // replace roundHistory[roundCounter] with 'correct'
-      const newRoundHistory = [...roundHistory];
-      newRoundHistory[roundCounter - 1] = "✔";
-      setRoundHistory(newRoundHistory);
+      answerHandle(true);
     } else {
       console.log("wrong!", e.target.value);
-      // replace roundHistory[roundCounter] with 'wrong'
-      const newRoundHistory = [...roundHistory];
-      newRoundHistory[roundCounter - 1] = "❌";
-      setRoundHistory(newRoundHistory);
+      answerHandle(false);
     }
-    setAnswerChosen((answer) => !answer);
   };
 
   const artButtons = roundArt.map((art, index) => {
@@ -75,7 +75,6 @@ const GameUI = ({
     <div className="gameui-container">
       <Timer timer={timer}></Timer>
       <div className="multiple-choice">{artButtons}</div>
-      {/* <RoundCounter roundCounter={roundCounter}></RoundCounter> */}
     </div>
   );
 };
