@@ -62,7 +62,7 @@
 <p align="center">
   <img src="https://media.giphy.com/media/3og0IUCoTmaHeYi3nO/giphy.gif" alt="Placeholder Demo Gif" />
 </p>
-ArtGuessr lets users explore artwork from the [MET API](https://metmuseum.github.io/) and play a game to quiz your artistic knowledge. 
+ArtGuessr lets users explore artwork from the <a href="https://metmuseum.github.io/">MET API</a> and play a game to quiz your artistic knowledge. 
 
 
 ### Built With
