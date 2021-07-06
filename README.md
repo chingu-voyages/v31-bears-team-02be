@@ -94,19 +94,32 @@ ArtGuessr lets users explore artwork from the <a href="https://metmuseum.github.
    
 ### Back End Setup
 
-1. Enter project's root directory
+1. Make sure PostgreSQL is running in your environment
+2. Enter project's root directory
    ```
    $ cd ..
    ```
-2. Install NPM packages
+3. Create an `.env` file in the project's root directory.  Replace quotations with values you specify.
+   ```
+   NODE_ENV="development or production"
+   PORT="app port number, should be 4001"
+   JWT_SECRET="specify a string to use for JWT"
+   RDS_HOSTNAME="hostname of the database server"
+   RDS_USERNAME="username of the database server"
+   RDS_PASSWORD="password for the username of the database server"
+   RDS_PORT="port of the database server"
+   RDS_DB_NAME="name of the database"
+   TEST_RDS_DB_NAME="name of the test database"
+   ```
+4. Install NPM packages
    ```sh
    $ npm install
    ```
-3. Setup database
+5. Run the migrations
    ```sh
-   $ ...
+   $ npm run migrate
    ```
-4. Start server
+6. Start server
    ```sh
    $ npm start
    ```
