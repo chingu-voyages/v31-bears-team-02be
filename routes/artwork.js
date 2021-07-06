@@ -3,8 +3,10 @@ const ArtworkController = require("../controller/artwork");
 const express = require("express");
 
 // Router for /artwork endpoint
-const userRouter = express.Router();
+const artworkRouter = express.Router();
 // Here '/' means the root of path 'artwork/'
-userRouter.route("/distinct/:columnName").get(ArtworkController.getDistinct);
+artworkRouter.route("/departments").get((req, res, next) => ArtworkController.handleRequests(req, res, next));
+
+//artworkRouter.route("/department")
 
 module.exports = artworkRouter;
