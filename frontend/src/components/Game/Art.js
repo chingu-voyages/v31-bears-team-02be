@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Magnifier from "react-magnifier";
 import { Prompt } from "react-router-dom";
-// import ReactImageMagnify from "react-image-magnify";
 
 function Art({ art, correctArt }) {
   console.log("correctArt: ", correctArt);
@@ -36,8 +35,6 @@ function Art({ art, correctArt }) {
 
   return (
     <div className="art-container">
-      {/* <div className="image-wrapper"> */}
-      {/*image && <img src={image.src} alt="artwork" className="artwork" /> */}
       {image && (
         <Magnifier
           className="artwork"
@@ -47,8 +44,6 @@ function Art({ art, correctArt }) {
           mgShowOverflow={false}
         />
       )}
-      {/* </div> */}
-      {/* <span>{correctArt.artistDisplayName}</span> */}
       <Prompt message={() => promptMsg} />
     </div>
   );
