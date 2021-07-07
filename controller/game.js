@@ -9,7 +9,7 @@ class GameController {
 		try {
 			
 			// deconstruct / get userId out of request
-			const { userId, artworks } = req.body					// artworks == [ ints ]
+			const { user_id, artworks } = req.body					// artworks == [ ints ]
 
 			// what is app? / what is db? 
 			// app == .get method is part of express/built in
@@ -20,7 +20,7 @@ class GameController {
 			const game = await gameModel.createGame(db, artworks);
 
 			// create new user_game obj in db. Why do model methods have to take in db?
-			const userGame = await userGameModel.createUserGame(db, userId, game.game_id);
+			const userGame = await userGameModel.createUserGame(db, user_id, game.game_id);
 
 			// send gameId back to front end
 			res.status(201).json(game.game_id);						// ? correct key?
