@@ -4,6 +4,8 @@
 class GameDAO {
 
 	gamesTable = 'games';
+	userGamesTable = 'user_games';
+	usersTable = 'users';
 
 	// /**
 	//  * Create new game obj in DB with userId
@@ -43,13 +45,60 @@ class GameDAO {
 	async updateGame(db, userId, gameId, updatedStotalScore) {
 		
 		// TODO: knex syntax for updating db entry
-		const [ game ] = await db('game')
-			.where({id: gameId})
+		const [ game ] = await db(this.gamesTable)
+			.where({"game_id": gameId})
 			.update({
 				total_score: updatedStotalScore
 			})
 
 		return game;
+	}
+
+
+
+	async getLeaderboard(db) {
+		
+		// TODO
+		// need knex query to 
+		//	- create inner join of user_games and games table on game_id
+		//  - collapse table by summing/grouping total_score column on user_id
+		//  - sort by total_score descending
+
+		// const leaderBoard =  await db.from(this.userGamesTable)
+		// 	.innerJoin(this.gamesTable, `${this.userGamesTable}.game_id`, 
+		// 		`${this.gamesTable}.game_id`)
+		// 	.sum('total_score')
+		// 	.groupBy('user_id')
+
+		// const leaderBoard =  await db.from(this.userGamesTable)
+		// 	.innerJoin(this.gamesTable, `${this.userGamesTable}.game_id`, 
+		// 		`${this.gamesTable}.game_id`)
+		// 	.select('user_id', db.raw('SUM(total_score)'))
+		// 	.groupBy('user_id')
+			
+		const leaderBoard =  await db.select(`${this.usersTable}.user_id`,
+				`${this.usersTable}.username`,
+				db.raw(`SUM(${this.gamesTable}.total_score)`))
+			.from(this.userGamesTable)
+			.innerJoin(this.gamesTable, `${this.userGamesTable}.game_id`, 
+				`${this.gamesTable}.game_id`)
+				.innerJoin(this.usersTable, `${this.userGamesTable}.user_id`, 
+					`${this.usersTable}.user_id`)
+				.groupBy(`${this.usersTable}.user_id`, `${this.usersTable}.username`)
+		
+		// Sort objects in array descending
+		leaderBoard.sort((a,b) => {
+			return (b.sum) - (a.sum);
+		});
+
+		// console.log(leaderBoard);
+		// leaderBoard == 
+		// [
+		// 	{ user_id: 1, username: 'joel', sum: 420 },
+		// 	{ user_id: 2, username: 'max', sum: 30 }
+		// ]
+
+		return leaderBoard;
 	}
 }
 

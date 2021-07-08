@@ -1,17 +1,16 @@
 const gameModel = require('../dao/game');
-const userGameModel = require('../dao/userGame');
+// const userGameModel = require('../dao/userGame');
 
 
-class LeadeboardController {
+class LeaderboardController {
 	async getLeaderboard(req, res) {
 		try {
-			
-			// TODO
-			// need knex query to 
-			//	- for each user, grab their total score, then sort highest to lowest
-		
-			const leaderboard = null;
+			console.log('testing- leaderboard controller');
 
+			const db = req.app.get('db');
+
+			const leaderboard = await gameModel.getLeaderboard(db);
+			
 			res.status(201).json(leaderboard);						
 
 		} catch (err) {
@@ -20,4 +19,4 @@ class LeadeboardController {
 	}
 }
 
-module.exports = new LeadeboardController();
+module.exports = new LeaderboardController();

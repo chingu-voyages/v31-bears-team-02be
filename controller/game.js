@@ -22,7 +22,7 @@ class GameController {
 			// create new user_game obj in db. Why do model methods have to take in db?
 			const userGame = await userGameModel.createUserGame(db, user_id, game.game_id);
 
-			// send gameId back to front end
+			// send game_id back to front end
 			res.status(201).json(game.game_id);						// ? correct key?
 
 		} catch (err) {
@@ -34,11 +34,12 @@ class GameController {
 	async updateGame(req, res) {
 		try {
 
-			const { userId, gameId, updated_total_score } = req.body;
-
+			const { user_id, game_id, updated_total_score } = req.body;
+			// BUG HERE? TypeError: Invalid attempt to destructure non-iterable instance.
+			// In order to be iterable, non-array objects must have a [Symbol.iterator]() method.
 			const db = req.app.get('db');
 
-			const game = await gameModel.updateGame(db, userId, gameId, updated_total_score);
+			const game = await gameModel.updateGame(db, user_id, game_id, updated_total_score);
 
 			res.status(201).json(game);
 

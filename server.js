@@ -18,6 +18,8 @@ import gameRouter from './routes/game';
 
 // Import globals from enviroment variables
 import config from './config';
+import leaderboardRouter from './routes/leaderboard';
+
 const {
 	NODE_ENV, PORT, RDS_HOSTNAME, RDS_USERNAME, RDS_PASSWORD, RDS_PORT, RDS_DB_NAME
 } = config;
@@ -87,6 +89,7 @@ app.get('/flower', (req, res) => {
 // API routes
 app.use('/user', userRouter);
 app.use('/game', gameRouter);
+app.use('/leaderboard', leaderboardRouter);
 
 
 // Error handling
