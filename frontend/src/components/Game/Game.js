@@ -20,6 +20,7 @@ const Game = () => {
   const [artImgLoaded, setArtImgLoaded] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [allCorrectArt, setAllCorrectArt] = useState([]);
+  const [gameInProgress, setGameInProgress] = useState(false);
   const [gameState, setGameState] = useState(
     JSON.parse(localStorage.getItem("gameState")) || null
   );
@@ -34,6 +35,7 @@ const Game = () => {
       setRoundHistory(gameState.roundHistory);
       setGameOver(gameState.gameOver);
       setAllCorrectArt(gameState.allCorrectArt);
+      setGameInProgress(gameState.gameInProgress);
     } else {
       const url =
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=11&q=painting";
@@ -78,6 +80,7 @@ const Game = () => {
       roundHistory,
       gameOver,
       allCorrectArt,
+      gameInProgress,
     };
 
     setGameState(newGameState);
@@ -95,7 +98,13 @@ const Game = () => {
   }
 
   if (!gameStarted) {
-    return <GameLanding setGameStarted={setGameStarted} />;
+    return (
+      <GameLanding
+        setGameStarted={setGameStarted}
+        gameInProgress={gameInProgress}
+        setGameInProgress={setGameInProgress}
+      />
+    );
   }
 
   return (

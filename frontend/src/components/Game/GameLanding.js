@@ -1,6 +1,7 @@
-const GameLanding = ({ setGameStarted }) => {
+const GameLanding = ({ setGameStarted, gameInProgress, setGameInProgress }) => {
   function toggleStart() {
     setGameStarted((state) => !state);
+    setGameInProgress(true);
   }
   return (
     <div className="game-landing-container">
@@ -31,7 +32,9 @@ const GameLanding = ({ setGameStarted }) => {
         </div>
 
         <div className="button-container">
-          <button onClick={toggleStart}>{"Start!"}</button>
+          <button onClick={toggleStart}>
+            {gameInProgress ? "Continue" : "Start!"}
+          </button>
         </div>
       </div>
     </div>
