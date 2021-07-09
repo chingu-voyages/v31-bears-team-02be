@@ -34,6 +34,7 @@ const Game = () => {
       setRoundHistory(gameState.roundHistory);
       setGameOver(gameState.gameOver);
       setAllCorrectArt(gameState.allCorrectArt);
+      setGameStarted(gameState.gameStarted);
     } else {
       const url =
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=11&q=painting";
@@ -67,26 +68,33 @@ const Game = () => {
       setAllCorrectArt(newAllCorrectArt);
 
       setCorrectArt(newCorrectArt);
+      console.log("newCorrectArt: ", newCorrectArt);
+      const newGameState = {
+        art,
+        correctArt,
+        roundCounter,
+        answerChosen,
+        roundArt,
+        roundHistory,
+        gameOver,
+        allCorrectArt,
+        gameStarted,
+      };
+
+      setGameState(newGameState);
+
+      localStorage.setItem("gameState", JSON.stringify(newGameState));
+
+      console.log("game state:", JSON.parse(localStorage.getItem("gameState")));
     }
 
-    const newGameState = {
-      art,
-      correctArt,
-      roundCounter,
-      answerChosen,
-      roundArt,
-      roundHistory,
-      gameOver,
-      allCorrectArt,
-    };
-
-    setGameState(newGameState);
-
-    localStorage.setItem("gameState", JSON.stringify(newGameState));
-
-    console.log("game state:", JSON.parse(localStorage.getItem("gameState")));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roundCounter]);
+
+  function resetGame() {
+    localStorage.removeItem("gameState");
+    window.location.reload();
+  }
 
   if (gameOver) {
     return (
@@ -95,7 +103,12 @@ const Game = () => {
   }
 
   if (!gameStarted) {
-    return <GameLanding setGameStarted={setGameStarted} />;
+    return (
+      <GameLanding
+        setGameStarted={setGameStarted}
+        setRoundCounter={setRoundCounter}
+      />
+    );
   }
 
   return (
@@ -124,7 +137,14 @@ const Game = () => {
             />
           )
         ))}
-      {art && <div className="round-history">{roundHistory.join(" - ")}</div>}
+      {art && (
+        <>
+          <div className="round-history">{roundHistory.join(" - ")}</div>
+          <div className="reset-game-container">
+            <button onClick={resetGame}>Reset Game</button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

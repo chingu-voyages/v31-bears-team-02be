@@ -34,7 +34,9 @@ const ArtInfoDialog = ({
           </a>
         </li>
       </ul>
-      <button onClick={handleClick}>next</button>
+      <div>
+        <button onClick={handleClick}>next</button>
+      </div>
     </div>
   );
 };

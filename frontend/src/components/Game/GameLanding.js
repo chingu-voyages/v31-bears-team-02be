@@ -1,7 +1,9 @@
-const GameLanding = ({ setGameStarted }) => {
+const GameLanding = ({ setGameStarted, setRoundCounter }) => {
   function toggleStart() {
     setGameStarted((state) => !state);
+    // setRoundCounter((round) => round + 1);
   }
+
   return (
     <div className="game-landing-container">
       <div className="game-landing">

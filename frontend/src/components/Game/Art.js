@@ -44,7 +44,7 @@ function Art({ art, correctArt }) {
           mgShowOverflow={false}
         />
       )}
-      <Prompt message={() => promptMsg} />
+      {/* <Prompt message={() => promptMsg} /> */}
     </div>
   );
 }
