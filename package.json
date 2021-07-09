@@ -29,6 +29,7 @@
     "morgan": "^1.10.0",
     "pg": "^8.6.0",
     "postgrator-cli": "^4.0.0",
+    "react-countdown-circle-timer": "^2.5.3",
     "tailwind-react-ui": "^0.8.1",
     "xss": "^1.0.9"
   },
