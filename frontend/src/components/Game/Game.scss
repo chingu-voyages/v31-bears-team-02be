@@ -59,15 +59,15 @@
 .multiple-choice {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  place-items: center;
+  gap: 0.5rem;
+  //  place-items: center;
 }
 
 .choice-button {
   white-space: normal;
   word-wrap: break-word;
   height: 4rem;
-  width: 15rem;
+  width: 20rem;
 }
 
 .art-info {
@@ -160,7 +160,7 @@
 
 .correct-art-container {
   display: grid;
-  grid-gap: 10px;
+  gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-auto-rows: 30rem;
   grid-auto-flow: dense;
@@ -273,8 +273,8 @@
   }
 
   .choice-button {
-    height: 2.5rem;
-    width: 20rem;
+    height: 3rem;
+    width: 25rem;
   }
 
   .game-landing {

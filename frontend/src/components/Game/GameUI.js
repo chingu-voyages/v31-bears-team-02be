@@ -9,7 +9,7 @@ const GameUI = ({
   roundHistory,
   setRoundHistory,
 }) => {
-  const [timer, setTimer] = useState(15);
+  const [timer, setTimer] = useState(60);
 
   useEffect(() => {
     let timerInterval;

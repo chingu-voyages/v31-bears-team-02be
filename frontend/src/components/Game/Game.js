@@ -6,6 +6,7 @@ import ArtInfoDialog from "./ArtInfoDialog";
 import GameOver from "./GameOver";
 import GameLanding from "./GameLanding";
 import { shuffleArray, fetchArt } from "./helper";
+import RoundHistory from "./RoundHistory";
 
 const Game = () => {
   const [art, setArt] = useState(null);
@@ -139,9 +140,15 @@ const Game = () => {
         ))}
       {art && (
         <>
-          <div className="round-history">{roundHistory.join(" - ")}</div>
+          {/* <div className="round-history">{roundHistory.join(" - ")}</div> */}
+          <RoundHistory roundHistory={roundHistory} />
           <div className="reset-game-container">
-            <button onClick={resetGame}>Reset Game</button>
+            <button
+              className="text-amber-500 bg-transparent border border-solid border-amber-500 hover:bg-amber-500 hover:text-white active:bg-amber-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              onClick={resetGame}
+            >
+              Reset Game
+            </button>
           </div>
         </>
       )}
