@@ -1,59 +1,77 @@
 import * as React from "react";
-import PropTypes from "prop-types";
-import "./TopNavBar.css";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { setSignedInUser } from '../App/authSlice';
+import { setModalOpen, setModalContent } from '../Modal/modalSlice';
 
-const TopNavBar = ({ onLogin, isAuthenticated, modalOpen, setModalOpen }) => (
-  <header className="top-nav-header">
-    <h2>
-      <Link to="/">ArtGuessr</Link>
-    </h2>
-    <nav>
-      {isAuthenticated ? (
-        <ul>
-          <li>
-            <Link to="/game">Play</Link>
-          </li>
-          <li>
-            <h3>Username</h3>
-          </li>
-          <li>
-            <button type="button" onClick={() => onLogin(false)}>
-              Sign Out
-            </button>
-          </li>
-        </ul>
-      ) : (
-        <ul>
-          <li>
-            <Link to="/game">Play</Link>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                setModalOpen(true);
-              }}
-            >
-              Sign Up
-            </button>
-          </li>
-          <li>
-            <button type="button" onClick={() => onLogin(true)}>
-              Sign in
-            </button>
-          </li>
-        </ul>
-      )}
-    </nav>
-  </header>
-);
+import "./TopNavBar.css";
 
-TopNavBar.propTypes = {
-  onLogin: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  modalOpen: PropTypes.bool.isRequired,
-  setModalOpen: PropTypes.func.isRequired,
+import credentials from '../../services/credentials';
+import ls from '../../services/localStorage';
+
+const token = {
+  ...ls('artguessr'),
+  ...credentials({ username: 'demo', password: 'demo' })
+}
+
+const TopNavBar = () => {
+
+  const isAuthenticated = useSelector((state) => state.authorization.isAuthenticated);
+  const signedInUser = useSelector((state) => state.authorization.signedInUser)
+  const dispatch = useDispatch();
+
+  return (
+    <header className="top-nav-header">
+      <h2>
+        <Link to="/">ArtGuessr</Link>
+      </h2>
+      <nav>
+        {isAuthenticated ? (
+          <ul>
+            <li>
+              <Link to="/game">Play</Link>
+            </li>
+            <li>
+              <h3>{signedInUser}</h3>
+            </li>
+            <li>
+              <button type="button" onClick={() => {
+                token.removeItem();
+                dispatch(setSignedInUser(''));
+              }}>
+                Sign Out
+              </button>
+            </li>
+          </ul>
+        ) : (
+          <ul>
+            <li>
+              <Link to="/game">Play</Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch(setModalContent('SIGNUPFORM'));
+                  dispatch(setModalOpen());
+                }}
+              >
+                Sign Up
+              </button>
+            </li>
+            <li>
+              <button type="button" onClick={() => {
+                dispatch(setModalContent('SIGNINFORM'));
+                dispatch(setModalOpen());
+              }}>
+                Sign in
+              </button>
+            </li>
+          </ul>
+        )}
+      </nav>
+    </header >
+  )
 };
 
 export default TopNavBar;

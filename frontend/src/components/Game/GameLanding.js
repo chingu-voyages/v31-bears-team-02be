@@ -33,7 +33,7 @@ const GameLanding = ({ setGameStarted, setRoundCounter }) => {
         </div>
 
         <div className="button-container">
-          <button onClick={toggleStart}>{"Start!"}</button>
+          <button onClick={toggleStart}>"Start!"</button>
         </div>
       </div>
     </div>
