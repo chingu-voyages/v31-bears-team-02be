@@ -28,12 +28,19 @@ const GameOver = ({ roundHistory, allCorrectArt }) => {
 
   return (
     <div className="game-over">
-      <h3>Game Over</h3>
-      <h3>Total Correct: {roundHistory.filter((x) => x === "✔").length}</h3>
-      <div className="correct-art-container">{allImages}</div>
+      <h1 className="text-6xl font-normal leading-normal text-black-800">
+        Game Over!
+      </h1>
+      <h3>You got {roundHistory.filter((x) => x === "✔").length} correct!</h3>
       <div className="button-container">
-        <button onClick={reloadPage}>Play again</button>
+        <button
+          className="bg-blueGray-500 text-white active:bg-blueGray-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          onClick={reloadPage}
+        >
+          Play again
+        </button>
       </div>
+      <div className="correct-art-container">{allImages}</div>
     </div>
   );
 };

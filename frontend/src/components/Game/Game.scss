@@ -152,7 +152,7 @@
 .game-over {
   /* height: 80vh; */
   text-align: center;
-  border: solid 2px black;
+  // border: solid 2px black;
   flex-direction: column;
   gap: 5em;
   justify-content: center;
@@ -284,7 +284,7 @@
   }
 
   .button-container {
-    order: 2;
+    order: 0;
   }
 
   .demo-image {
