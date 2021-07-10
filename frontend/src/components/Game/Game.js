@@ -7,7 +7,6 @@ import GameOver from "./GameOver";
 import GameLanding from "./GameLanding";
 import { shuffleArray, fetchArt } from "./helper";
 import RoundHistory from "./RoundHistory";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const Game = () => {
   const [art, setArt] = useState(null);

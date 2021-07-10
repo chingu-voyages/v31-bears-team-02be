@@ -1,6 +1,6 @@
 import Timer from "./Timer";
 import ChoiceButton from "./ChoiceButton";
-import { useEffect, useState } from "react";
+
 const GameUI = ({
   correctArt,
   roundCounter,
@@ -9,30 +9,6 @@ const GameUI = ({
   roundHistory,
   setRoundHistory,
 }) => {
-  const [timer, setTimer] = useState(60);
-
-  useEffect(() => {
-    let timerInterval;
-    function startTimer() {
-      timerInterval = setInterval(incrementTimer, 1000);
-    }
-
-    function incrementTimer() {
-      setTimer((timer) => timer - 1);
-    }
-
-    startTimer();
-
-    function endTimer() {
-      clearInterval(timerInterval);
-      setTimer(0);
-    }
-
-    return () => {
-      endTimer();
-    };
-  }, []);
-
   function answerHandle(valid) {
     const newRoundHistory = [...roundHistory];
     if (valid) {
@@ -43,13 +19,6 @@ const GameUI = ({
     setRoundHistory(newRoundHistory);
     setAnswerChosen(true);
   }
-
-  useEffect(() => {
-    if (timer === 0) {
-      answerHandle(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timer, setAnswerChosen]);
 
   const handleClick = (e) => {
     if (e.target.value === correctArt.artistDisplayName) {
@@ -73,7 +42,7 @@ const GameUI = ({
 
   return (
     <div className="gameui-container">
-      <Timer timer={timer}></Timer>
+      <Timer answerHandle={answerHandle}></Timer>
       <div className="multiple-choice">{artButtons}</div>
     </div>
   );
