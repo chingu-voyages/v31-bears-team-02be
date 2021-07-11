@@ -1,3 +1,4 @@
+import { BiLinkExternal } from "react-icons/bi";
 const ArtInfoDialog = ({
   setRoundCounter,
   setAnswerChosen,
@@ -19,17 +20,31 @@ const ArtInfoDialog = ({
   return (
     <div className="art-info">
       <ul>
-        <li>Title: {artInfo.title}</li>
-
         <li>
-          Artist: {artInfo.artistDisplayName} ({artInfo.artistBeginDate} -
-          {artInfo.artistEndDate})
+          <strong>Title:</strong> {artInfo.title}
         </li>
 
-        {artInfo.objectDate && <li>Date: {artInfo.objectDate}</li>}
+        <li>
+          <strong>Artist:</strong> {artInfo.artistDisplayName} (
+          {artInfo.artistBeginDate} -{artInfo.artistEndDate})
+        </li>
+
+        {artInfo.objectDate && (
+          <li>
+            <strong>Date:</strong> {artInfo.objectDate}
+          </li>
+        )}
 
         <li>
-          <a href={artInfo.objectURL} rel="noreferrer" target="_blank">
+          <a
+            className="underline"
+            href={artInfo.objectURL}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <BiLinkExternal
+              style={{ display: "inline", fill: "rebeccapurple" }}
+            />
             More info
           </a>
         </li>

@@ -10,7 +10,7 @@ function Timer({ answerHandle }) {
       size={50}
       strokeWidth={5}
       isPlaying
-      duration={30}
+      duration={100}
       onComplete={timeEnd}
       colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
     >

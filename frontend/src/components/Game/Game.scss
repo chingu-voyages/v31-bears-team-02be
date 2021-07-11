@@ -68,17 +68,37 @@
   word-wrap: break-word;
   height: 4rem;
   width: 20rem;
+  border: 1px #33333399 solid;
+}
+
+.choice-button:hover {
+  color: rgb(82, 98, 151);
+  border: 1px rgb(82, 98, 151) solid;
 }
 
 .art-info {
   display: grid;
-  place-content: center;
+  justify-items: center;
   grid-row: 2;
+  grid-template-rows: 3fr 1fr;
   // max-height: 20vh;
-  margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+}
+
+.art-info ul {
+  padding: 1rem;
+  width: auto;
+}
+
+.art-info ul a {
+  color: rebeccapurple;
+  transition: 300ms all;
+}
+
+.art-info ul a:hover {
+  color: black;
 }
 
 .round-history {
@@ -274,7 +294,7 @@
 
   .choice-button {
     height: 3rem;
-    width: 25rem;
+    width: 20rem;
   }
 
   .game-landing {

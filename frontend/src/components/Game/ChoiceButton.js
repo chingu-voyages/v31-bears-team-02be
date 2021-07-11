@@ -8,7 +8,7 @@ const ChoiceButton = ({ artistName, handleClick }) => {
     // ></input>
     <button
       onClick={handleClick}
-      className="choice-button h-12 text-purple-500 bg-transparent border border-solid border-purple-500 hover:bg-purple-500 hover:text-white active:bg-purple-600 font-bold uppercase px-8 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+      className="choice-button h-12 bg-transparent border border-solid font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
       type="button"
       value={artistName}
     >
