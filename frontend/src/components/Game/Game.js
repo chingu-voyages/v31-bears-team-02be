@@ -4,8 +4,13 @@ import "./Game.css";
 import GameUI from "./GameUI";
 import ArtInfoDialog from "./ArtInfoDialog";
 import GameOver from "./GameOver";
+import gameAPI from '../../services/api';
+import ls from '../../services/localStorage';
 
 const Game = () => {
+
+  ;
+
   const [art, setArt] = useState(null);
   const [correctArt, setCorrectArt] = useState(null);
   const [roundCounter, setRoundCounter] = useState(0);
