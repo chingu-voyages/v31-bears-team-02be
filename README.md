@@ -21,7 +21,7 @@
     <a href="https://github.com/chingu-voyages/v31-bears-team-02be"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/chingu-voyages/v31-bears-team-02be">View Demo</a>
+    <a href="http://artguessr-env-dev.eba-y63x4vsd.us-east-2.elasticbeanstalk.com/">View Demo</a>
     ·
     <a href="https://github.com/chingu-voyages/v31-bears-team-02be/issues">Report Bug</a>
     ·
