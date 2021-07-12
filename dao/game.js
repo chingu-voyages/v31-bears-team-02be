@@ -15,9 +15,7 @@ class GameDAO {
 	//  * game_id: integer (refers to primary key in game table)
 	//  * }>} Promise that resolves to the created game from db
 	//  */
-	async createGame(db, artworks) {
-
-		const total_score = 0;
+	async createGame(db, artworks, total_score) {
 
 		// destructure game after creating new game because knex will return as a 2d array
 		const [ game ] = await db(this.gamesTable)	

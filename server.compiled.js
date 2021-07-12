@@ -23,6 +23,8 @@ var _game = _interopRequireDefault(require("./routes/game"));
 
 var _config = _interopRequireDefault(require("./config"));
 
+var _leaderboard = _interopRequireDefault(require("./routes/leaderboard"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // server.js
@@ -106,7 +108,8 @@ app.get('/flower', function (req, res) {
 }); // API routes
 
 app.use('/user', _user["default"]);
-app.use('/game', _game["default"]); // Error handling
+app.use('/game', _game["default"]);
+app.use('/leaderboard', _leaderboard["default"]); // Error handling
 
 app.use(function (error, req, res, next) {
   var response;
@@ -127,7 +130,5 @@ app.use(function (error, req, res, next) {
 app.listen(PORT, function () {
   console.log("Server listening at port ".concat(PORT, "."));
 }); // express.json() is a built-in middleware, parses incoming JSON requests, returns Object
-
 // app.use(express.json());
 // app.use(router);
-

@@ -1,22 +1,24 @@
-import { updateGame } from "../../../dao/game";
+// import { updateGame } from "../../../dao/game";
 const GAMEENDPOINT = 'http://localhost:4001';
 
 
-const gameAPI = ({ username = '' } = {}) => ({
+const gameAPI = ({ user_id } = '') => ({
 		data: {
-			username,
+			user_id,
 			path: GAMEENDPOINT,
 		},
 
 
-		async createGame(userName) {
+		async createGame(total_score, artworks) {
 			try {
 				const { user_id, path } = this.data;
+
+				console.log(user_id);
 
 				const res = await fetch(`${path}/game`, {
 					method: 'POST',
 					headers: { 'content-type': 'application/json' },
-					body: JSON.stringify({ user_id })
+					body: JSON.stringify({ user_id, total_score, artworks })
 				});
 
 				if (!res.ok) {
@@ -26,6 +28,7 @@ const gameAPI = ({ username = '' } = {}) => ({
 
 				// should receive game_id from backend
 				const data = await res.json();
+				console.log(data);
 				return data;
 				
 			} catch (error) {
