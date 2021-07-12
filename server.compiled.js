@@ -127,5 +127,7 @@ app.use(function (error, req, res, next) {
 app.listen(PORT, function () {
   console.log("Server listening at port ".concat(PORT, "."));
 }); // express.json() is a built-in middleware, parses incoming JSON requests, returns Object
+
 // app.use(express.json());
 // app.use(router);
+

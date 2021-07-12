@@ -1,41 +1,63 @@
+import { BiLinkExternal } from "react-icons/bi";
 const ArtInfoDialog = ({
   setRoundCounter,
   setAnswerChosen,
   artInfo,
-  setArt,
   setCorrectArt,
   setGameOver,
   roundCounter,
 }) => {
   function handleClick(e) {
-    setRoundCounter((round) => round + 1);
+    setRoundCounter((round) => {
+      return round + 1;
+    });
     setAnswerChosen(false);
     setCorrectArt(null);
-    if (roundCounter === 10) {
+    if (roundCounter > 9) {
       setGameOver(true);
     }
   }
   return (
-    <>
-      Art info Dialog
+    <div className="art-info">
       <ul>
-        <li>Title: {artInfo.title}</li>
-
         <li>
-          Artist: {artInfo.artistDisplayName} ({artInfo.artistBeginDate} -
-          {artInfo.artistEndDate})
+          <strong>Title:</strong> {artInfo.title}
         </li>
 
-        {artInfo.objectDate && <li>Date: {artInfo.objectDate}</li>}
+        <li>
+          <strong>Artist:</strong> {artInfo.artistDisplayName} (
+          {artInfo.artistBeginDate} -{artInfo.artistEndDate})
+        </li>
+
+        {artInfo.objectDate && (
+          <li>
+            <strong>Date:</strong> {artInfo.objectDate}
+          </li>
+        )}
 
         <li>
-          <a href={artInfo.objectURL} rel="noreferrer" target="_blank">
+          <a
+            className="underline"
+            href={artInfo.objectURL}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <BiLinkExternal
+              style={{ display: "inline", fill: "rebeccapurple" }}
+            />
             More info
           </a>
         </li>
       </ul>
-      <button onClick={handleClick}>next</button>
-    </>
+      <div>
+        <button
+          className="bg-blueGray-500 text-white active:bg-blueGray-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          onClick={handleClick}
+        >
+          next
+        </button>
+      </div>
+    </div>
   );
 };
 
