@@ -47,7 +47,7 @@ const GameLanding = ({ setGameStarted, setRoundCounter }) => {
           </ul>
         </div>
         <div className="demo-image">
-          <img src="https://i.imgur.com/Pk51a30.jpg" alt="" />
+          <img src="/images/demo-game.gif" alt="" />
         </div>
       </div>
     </div>
