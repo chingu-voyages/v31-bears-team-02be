@@ -1,67 +1,33 @@
 import Timer from "./Timer";
 import ChoiceButton from "./ChoiceButton";
-import { useEffect, useState } from "react";
+
 const GameUI = ({
   correctArt,
   roundCounter,
-  setRoundCounter,
   setAnswerChosen,
-  answerChosen,
-  setArt,
   roundArt,
   roundHistory,
   setRoundHistory,
 }) => {
-  const [timer, setTimer] = useState(10);
-
-  useEffect(() => {
-    let timerInterval;
-    function startTimer() {
-      timerInterval = setInterval(incrementTimer, 1000);
-    }
-
-    function incrementTimer() {
-      setTimer((timer) => timer - 1);
-    }
-
-    startTimer();
-
-    function endTimer() {
-      clearInterval(timerInterval);
-      setTimer(0);
-    }
-
-    return () => {
-      endTimer();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (timer === 0) {
-      setAnswerChosen(true);
-      const newRoundHistory = [...roundHistory];
+  function answerHandle(valid) {
+    const newRoundHistory = [...roundHistory];
+    if (valid) {
+      newRoundHistory[roundCounter - 1] = "✔";
+    } else {
       newRoundHistory[roundCounter - 1] = "❌";
-      setRoundHistory(newRoundHistory);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timer, setAnswerChosen]);
+    setRoundHistory(newRoundHistory);
+    setAnswerChosen(true);
+  }
 
   const handleClick = (e) => {
     if (e.target.value === correctArt.artistDisplayName) {
       console.log("correct!", e.target.value);
-
-      // replace roundHistory[roundCounter] with 'correct'
-      const newRoundHistory = [...roundHistory];
-      newRoundHistory[roundCounter - 1] = "✔";
-      setRoundHistory(newRoundHistory);
+      answerHandle(true);
     } else {
       console.log("wrong!", e.target.value);
-      // replace roundHistory[roundCounter] with 'wrong'
-      const newRoundHistory = [...roundHistory];
-      newRoundHistory[roundCounter - 1] = "❌";
-      setRoundHistory(newRoundHistory);
+      answerHandle(false);
     }
-    setAnswerChosen((answer) => !answer);
   };
 
   const artButtons = roundArt.map((art, index) => {
@@ -76,9 +42,8 @@ const GameUI = ({
 
   return (
     <div className="gameui-container">
-      <Timer timer={timer}></Timer>
+      <Timer answerHandle={answerHandle}></Timer>
       <div className="multiple-choice">{artButtons}</div>
-      {/* <RoundCounter roundCounter={roundCounter}></RoundCounter> */}
     </div>
   );
 };
