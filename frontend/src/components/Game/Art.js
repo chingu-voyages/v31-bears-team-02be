@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import Magnifier from "react-magnifier";
 import { Prompt } from "react-router-dom";
+import {
+  ComponentTransition,
+  AnimationTypes,
+} from "react-component-transition";
 
 function Art({ art, correctArt }) {
   console.log("correctArt: ", correctArt);
@@ -11,9 +15,9 @@ function Art({ art, correctArt }) {
     "Are you sure you want to quit? Game progress is saved and will be loaded the next time you play.";
 
   useEffect(() => {
-    const smallImg = new Image();
-    smallImg.src = correctArt.primaryImageSmall;
-    smallImg.onload = () => setImage(smallImg);
+    // const smallImg = new Image();
+    // smallImg.src = correctArt.primaryImageSmall;
+    // smallImg.onload = () => setImage(smallImg);
     const largeImg = new Image();
     largeImg.src = correctArt.primaryImage;
     largeImg.onload = () => setImage(largeImg);
@@ -35,15 +39,20 @@ function Art({ art, correctArt }) {
 
   return (
     <div className="art-container">
-      {image && (
-        <Magnifier
-          className="artwork"
-          src={image.src}
-          height={"max-content"}
-          width={"max-content"}
-          mgShowOverflow={false}
-        />
-      )}
+      <ComponentTransition
+        enterAnimation={AnimationTypes.slideLeft.enter}
+        exitAnimation={AnimationTypes.slideRight.exit}
+      >
+        {image && (
+          <Magnifier
+            className="artwork"
+            src={image.src}
+            height={"max-content"}
+            width={"max-content"}
+            mgShowOverflow={false}
+          />
+        )}
+      </ComponentTransition>
       {/* <Prompt message={() => promptMsg} /> */}
     </div>
   );

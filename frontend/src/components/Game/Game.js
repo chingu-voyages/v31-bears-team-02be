@@ -7,6 +7,10 @@ import GameOver from "./GameOver";
 import GameLanding from "./GameLanding";
 import { shuffleArray, fetchArt } from "./helper";
 import RoundHistory from "./RoundHistory";
+import {
+  ComponentTransition,
+  AnimationTypes,
+} from "react-component-transition";
 
 const Game = () => {
   const [art, setArt] = useState(null);
@@ -36,11 +40,24 @@ const Game = () => {
       setGameOver(gameState.gameOver);
       setAllCorrectArt(gameState.allCorrectArt);
       setGameStarted(gameState.gameStarted);
+
+      for (let i = 0; i < gameState.art.length; i++) {
+        const preLoadImg = new Image();
+        preLoadImg.src = gameState.art[i].primaryImage;
+        preLoadImg.onload = () => {};
+      }
     } else {
       const url =
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=11&q=painting";
       const artFetch = async () => {
         const randomArt = await fetchArt(url);
+
+        for (let i = 0; i < randomArt.length; i++) {
+          const preLoadImg = new Image();
+          preLoadImg.src = randomArt[i].primaryImage;
+          preLoadImg.onload = () => {};
+        }
+
         setArt(randomArt);
         setRoundCounter((round) => round + 1);
       };
@@ -61,7 +78,7 @@ const Game = () => {
 
       // Preload image before rendering game ui
       const artImg = new Image();
-      artImg.src = newCorrectArt.primaryImageSmall;
+      artImg.src = newCorrectArt.primaryImage;
       artImg.onload = () => setArtImgLoaded(true);
 
       const newAllCorrectArt = [...allCorrectArt];
@@ -115,30 +132,36 @@ const Game = () => {
   return (
     <div className="game-screen">
       {roundArt && correctArt && <Art correctArt={correctArt} art={art} />}
-      {roundArt &&
-        art &&
-        (answerChosen ? (
-          <ArtInfoDialog
-            setAnswerChosen={setAnswerChosen}
-            setRoundCounter={setRoundCounter}
-            artInfo={correctArt}
-            setCorrectArt={setCorrectArt}
-            setGameOver={setGameOver}
-            roundCounter={roundCounter}
-          />
-        ) : (
-          artImgLoaded && (
-            <GameUI
-              correctArt={correctArt}
-              roundArt={roundArt}
-              roundCounter={roundCounter}
+
+      <ComponentTransition
+        enterAnimation={AnimationTypes.scale.enter}
+        exitAnimation={AnimationTypes.fade.exit}
+      >
+        {roundArt &&
+          art &&
+          (answerChosen ? (
+            <ArtInfoDialog
               setAnswerChosen={setAnswerChosen}
-              roundHistory={roundHistory}
-              setRoundHistory={setRoundHistory}
+              setRoundCounter={setRoundCounter}
+              artInfo={correctArt}
+              setCorrectArt={setCorrectArt}
+              setGameOver={setGameOver}
+              roundCounter={roundCounter}
             />
-          )
-        ))}
-      {art && (
+          ) : (
+            artImgLoaded && (
+              <GameUI
+                correctArt={correctArt}
+                roundArt={roundArt}
+                roundCounter={roundCounter}
+                setAnswerChosen={setAnswerChosen}
+                roundHistory={roundHistory}
+                setRoundHistory={setRoundHistory}
+              />
+            )
+          ))}
+      </ComponentTransition>
+      {artImgLoaded && (
         <>
           {/* <div className="round-history">{roundHistory.join(" - ")}</div> */}
           <RoundHistory roundHistory={roundHistory} />
