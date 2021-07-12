@@ -60,7 +60,7 @@
 ## About The Project
 
 <p align="center">
-  <img src="https://media.giphy.com/media/3og0IUCoTmaHeYi3nO/giphy.gif" alt="Placeholder Demo Gif" />
+  <img src="./demo-readme.webp" alt="Demo Gif" />
 </p>
 ArtGuessr lets users explore artwork from the <a href="https://metmuseum.github.io/">MET API</a> and play a game to quiz your artistic knowledge. 
 
