@@ -1,4 +1,3 @@
-// import { updateGame } from "../../../dao/game";
 const GAMEENDPOINT = 'http://localhost:4001';
 
 
@@ -53,6 +52,33 @@ const gameAPI = ({ user_id } = '') => ({
 
 				const data = await res.json();
 				return data;
+			} catch (error) {
+				return error;
+			}
+		},
+
+
+		async getLeaderboard() {
+			try {
+
+				const { path } = this.data;
+
+				const res = await fetch(`${path}/leaderboard`, {
+					method: 'GET',
+					headers: { 'content-type': 'application/json' },
+					// body: JSON.stringify({})
+				});
+
+				if (!res.ok) {
+					const body = await res.json();
+					throw new Error(body.error);
+				}
+
+				// should receive leaderboard object from backend
+				const data = await res.json();
+				console.log(data);
+				return data;
+				
 			} catch (error) {
 				return error;
 			}
