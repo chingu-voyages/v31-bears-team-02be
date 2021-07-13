@@ -4,8 +4,6 @@ import "./Game.scss";
 import GameUI from "./GameUI";
 import ArtInfoDialog from "./ArtInfoDialog";
 import GameOver from "./GameOver";
-import gameAPI from '../../services/api';
-import ls from '../../services/localStorage';
 import GameLanding from "./GameLanding";
 import { shuffleArray, fetchArt } from "./helper";
 import RoundHistory from "./RoundHistory";
@@ -15,9 +13,6 @@ import {
 } from "react-component-transition";
 
 const Game = () => {
-
-  ;
-
   const [art, setArt] = useState(null);
   const [correctArt, setCorrectArt] = useState(null);
   const [roundCounter, setRoundCounter] = useState(0);
@@ -46,7 +41,7 @@ const Game = () => {
       setAllCorrectArt(gameState.allCorrectArt);
       setGameStarted(gameState.gameStarted);
 
-      for (let i = 0; i < gameState.art.length; i++) {
+      for (let i = 0; i < gameState.art.length; i += 4) {
         const preLoadImg = new Image();
         preLoadImg.src = gameState.art[i].primaryImage;
         preLoadImg.onload = () => {};
@@ -57,7 +52,7 @@ const Game = () => {
       const artFetch = async () => {
         const randomArt = await fetchArt(url);
 
-        for (let i = 0; i < randomArt.length; i++) {
+        for (let i = 0; i < randomArt.length; i += 4) {
           const preLoadImg = new Image();
           preLoadImg.src = randomArt[i].primaryImage;
           preLoadImg.onload = () => {};
