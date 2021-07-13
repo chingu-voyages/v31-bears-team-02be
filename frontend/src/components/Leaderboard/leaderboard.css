@@ -1,0 +1,24 @@
+.leaderboard-wrap {
+	background:lightgrey;
+	display: flex;
+	justify-content: center;
+}
+
+.leaderboard-inner {
+	background: lightpink;
+	width: 40rem;
+}
+
+.leaderboard-row {
+	/* background:lightblue; */
+}
+
+.leaderboard-ul {
+	/* background:lightcoral; */
+	display: flex;
+	justify-content: space-between;
+}
+
+.leaderboard-ul li {
+	background:lightgreen;
+}

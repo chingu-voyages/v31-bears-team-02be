@@ -11,6 +11,7 @@ import NotFound from "../NotFound";
 import Modal from "../Modal/Modal";
 import Footer from "../Footer/Footer";
 import Game from "../Game/Game";
+import Leaderboard from "../Leaderboard/leaderboard";
 import "./App.css";
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,6 +55,7 @@ function App() {
           component={HomePage}
         />
         <Route path="/game" component={Game} />
+        <Route path="/leaderboard" component={Leaderboard} />
         <PrivateRoute
           path="*"
           component={NotFound}

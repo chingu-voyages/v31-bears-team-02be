@@ -31,6 +31,9 @@ const TopNavBar = () => {
             <li>
               <Link to="/game">Play</Link>
             </li>
+            <li className="nav-leaderboard">
+              <Link to="/leaderboard">Leaderboard</Link>
+            </li>
             <li>
               <h3>{signedInUser}</h3>
             </li>
@@ -47,6 +50,9 @@ const TopNavBar = () => {
           <ul>
             <li>
               <Link to="/game">Play</Link>
+            </li>
+            <li className="nav-leaderboard">
+              <Link to="/leaderboard">Leaderboard</Link>
             </li>
             <li>
               <button
