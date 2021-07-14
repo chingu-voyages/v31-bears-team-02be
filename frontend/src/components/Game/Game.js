@@ -58,7 +58,8 @@ const Game = () => {
           preLoadImg.onload = () => {};
         }
 
-        setArt(randomArt);
+        setAllCorrectArt(randomArt.slice(0, 10));
+        setArt(randomArt.slice(10));
         setRoundCounter((round) => round + 1);
       };
       artFetch();
@@ -70,20 +71,17 @@ const Game = () => {
       if (art.length === 0) return;
 
       setArtImgLoaded(false);
-      const newRoundArt = art.slice(0, 4);
-      const newCorrectArt = newRoundArt[0];
+      const newCorrectArt = allCorrectArt[roundCounter - 1];
+      const newRoundArt = art.slice(0, 3);
+      newRoundArt.push(newCorrectArt);
       shuffleArray(newRoundArt);
       setRoundArt(newRoundArt);
-      setArt((art) => art.slice(4));
+      setArt((art) => art.slice(3));
 
       // Preload image before rendering game ui
       const artImg = new Image();
       artImg.src = newCorrectArt.primaryImage;
       artImg.onload = () => setArtImgLoaded(true);
-
-      const newAllCorrectArt = [...allCorrectArt];
-      newAllCorrectArt[roundCounter - 1] = newCorrectArt;
-      setAllCorrectArt(newAllCorrectArt);
 
       setCorrectArt(newCorrectArt);
       console.log("newCorrectArt: ", newCorrectArt);
