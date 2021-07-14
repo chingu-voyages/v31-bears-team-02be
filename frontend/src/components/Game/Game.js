@@ -22,12 +22,12 @@ const Game = () => {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
   ]);
   const [gameOver, setGameOver] = useState(false);
-  const [artImgLoaded, setArtImgLoaded] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [allCorrectArt, setAllCorrectArt] = useState([]);
   const [gameState, setGameState] = useState(
     JSON.parse(localStorage.getItem("gameState")) || null
   );
+  const [preloadedImages, setPreloadedImages] = useState([]);
 
   useEffect(() => {
     if (gameState) {
@@ -41,10 +41,16 @@ const Game = () => {
       setAllCorrectArt(gameState.allCorrectArt);
       setGameStarted(gameState.gameStarted);
 
-      for (let i = 0; i < gameState.art.length; i += 4) {
+      for (let i = 0; i < gameState.allCorrectArt.length; i++) {
         const preLoadImg = new Image();
-        preLoadImg.src = gameState.art[i].primaryImage;
-        preLoadImg.onload = () => {};
+        preLoadImg.src = gameState.allCorrectArt[i].primaryImage;
+        preLoadImg.onload = () => {
+          setPreloadedImages((arr) => {
+            const newArray = [...arr];
+            newArray[i] = preLoadImg;
+            return newArray;
+          });
+        };
       }
     } else {
       const url =
@@ -52,13 +58,21 @@ const Game = () => {
       const artFetch = async () => {
         const randomArt = await fetchArt(url);
 
-        for (let i = 0; i < randomArt.length; i += 4) {
+        const newAllCorrectArt = randomArt.slice(0, 10);
+        for (let i = 0; i < newAllCorrectArt.length; i++) {
           const preLoadImg = new Image();
-          preLoadImg.src = randomArt[i].primaryImage;
-          preLoadImg.onload = () => {};
+          preLoadImg.src = newAllCorrectArt[i].primaryImage;
+          preLoadImg.onload = () => {
+            setPreloadedImages((arr) => {
+              const newArray = [...arr];
+              newArray[i] = preLoadImg;
+              return newArray;
+            });
+          };
         }
 
-        setAllCorrectArt(randomArt.slice(0, 10));
+        setAllCorrectArt(newAllCorrectArt);
+
         setArt(randomArt.slice(10));
         setRoundCounter((round) => round + 1);
       };
@@ -70,18 +84,12 @@ const Game = () => {
     if (art) {
       if (art.length === 0) return;
 
-      setArtImgLoaded(false);
       const newCorrectArt = allCorrectArt[roundCounter - 1];
       const newRoundArt = art.slice(0, 3);
       newRoundArt.push(newCorrectArt);
       shuffleArray(newRoundArt);
       setRoundArt(newRoundArt);
       setArt((art) => art.slice(3));
-
-      // Preload image before rendering game ui
-      const artImg = new Image();
-      artImg.src = newCorrectArt.primaryImage;
-      artImg.onload = () => setArtImgLoaded(true);
 
       setCorrectArt(newCorrectArt);
       console.log("newCorrectArt: ", newCorrectArt);
@@ -129,7 +137,9 @@ const Game = () => {
 
   return (
     <div className="game-screen">
-      {roundArt && correctArt && <Art correctArt={correctArt} art={art} />}
+      {roundArt && correctArt && preloadedImages[roundCounter - 1] && (
+        <Art correctArt={preloadedImages[roundCounter - 1]} art={art} />
+      )}
 
       <ComponentTransition
         enterAnimation={AnimationTypes.scale.enter}
@@ -147,7 +157,7 @@ const Game = () => {
               roundCounter={roundCounter}
             />
           ) : (
-            artImgLoaded && (
+            preloadedImages[roundCounter - 1] && (
               <GameUI
                 correctArt={correctArt}
                 roundArt={roundArt}
@@ -159,7 +169,7 @@ const Game = () => {
             )
           ))}
       </ComponentTransition>
-      {artImgLoaded && (
+      {preloadedImages[roundCounter - 1] && (
         <>
           {/* <div className="round-history">{roundHistory.join(" - ")}</div> */}
           <RoundHistory roundHistory={roundHistory} />
