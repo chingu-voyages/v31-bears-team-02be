@@ -29,6 +29,20 @@ const Game = () => {
   );
   const [preloadedImages, setPreloadedImages] = useState([]);
 
+  function preloadArtImages(artArray) {
+    for (let i = 0; i < artArray.length; i++) {
+      const preLoadImg = new Image();
+      preLoadImg.src = artArray[i].primaryImage;
+      preLoadImg.onload = () => {
+        setPreloadedImages((arr) => {
+          const newArray = [...arr];
+          newArray[i] = preLoadImg;
+          return newArray;
+        });
+      };
+    }
+  }
+
   useEffect(() => {
     if (gameState) {
       setArt(gameState.art);
@@ -41,17 +55,7 @@ const Game = () => {
       setAllCorrectArt(gameState.allCorrectArt);
       setGameStarted(gameState.gameStarted);
 
-      for (let i = 0; i < gameState.allCorrectArt.length; i++) {
-        const preLoadImg = new Image();
-        preLoadImg.src = gameState.allCorrectArt[i].primaryImage;
-        preLoadImg.onload = () => {
-          setPreloadedImages((arr) => {
-            const newArray = [...arr];
-            newArray[i] = preLoadImg;
-            return newArray;
-          });
-        };
-      }
+      preloadArtImages(gameState.allCorrectArt);
     } else {
       const url =
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=11&q=painting";
@@ -59,17 +63,7 @@ const Game = () => {
         const randomArt = await fetchArt(url);
 
         const newAllCorrectArt = randomArt.slice(0, 10);
-        for (let i = 0; i < newAllCorrectArt.length; i++) {
-          const preLoadImg = new Image();
-          preLoadImg.src = newAllCorrectArt[i].primaryImage;
-          preLoadImg.onload = () => {
-            setPreloadedImages((arr) => {
-              const newArray = [...arr];
-              newArray[i] = preLoadImg;
-              return newArray;
-            });
-          };
-        }
+        preloadArtImages(newAllCorrectArt);
 
         setAllCorrectArt(newAllCorrectArt);
 
