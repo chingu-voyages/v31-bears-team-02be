@@ -131,37 +131,35 @@ const Game = () => {
 
   return (
     <div className="game-screen">
-      {roundArt && correctArt && preloadedImages[roundCounter - 1] && (
-        <Art correctArt={preloadedImages[roundCounter - 1]} art={art} />
+      {preloadedImages[roundCounter - 1] && (
+        <Art preloadedImages={preloadedImages} roundCounter={roundCounter} />
       )}
 
       <ComponentTransition
         enterAnimation={AnimationTypes.scale.enter}
         exitAnimation={AnimationTypes.fade.exit}
       >
-        {roundArt &&
-          art &&
-          (answerChosen ? (
-            <ArtInfoDialog
-              setAnswerChosen={setAnswerChosen}
-              setRoundCounter={setRoundCounter}
-              artInfo={correctArt}
-              setCorrectArt={setCorrectArt}
-              setGameOver={setGameOver}
+        {answerChosen ? (
+          <ArtInfoDialog
+            setAnswerChosen={setAnswerChosen}
+            setRoundCounter={setRoundCounter}
+            artInfo={correctArt}
+            setCorrectArt={setCorrectArt}
+            setGameOver={setGameOver}
+            roundCounter={roundCounter}
+          />
+        ) : (
+          preloadedImages[roundCounter - 1] && (
+            <GameUI
+              correctArt={correctArt}
+              roundArt={roundArt}
               roundCounter={roundCounter}
+              setAnswerChosen={setAnswerChosen}
+              roundHistory={roundHistory}
+              setRoundHistory={setRoundHistory}
             />
-          ) : (
-            preloadedImages[roundCounter - 1] && (
-              <GameUI
-                correctArt={correctArt}
-                roundArt={roundArt}
-                roundCounter={roundCounter}
-                setAnswerChosen={setAnswerChosen}
-                roundHistory={roundHistory}
-                setRoundHistory={setRoundHistory}
-              />
-            )
-          ))}
+          )
+        )}
       </ComponentTransition>
       {preloadedImages[roundCounter - 1] && (
         <>

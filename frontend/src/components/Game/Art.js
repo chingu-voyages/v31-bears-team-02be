@@ -4,19 +4,14 @@ import Magnifier from "react-magnifier";
 import {
   ComponentTransition,
   AnimationTypes,
+  ComponentTransitionList,
 } from "react-component-transition";
 
-function Art({ art, correctArt }) {
-  console.log("correctArt: ", correctArt);
-  console.log(art);
-
-  const [image, setImage] = useState(null);
+function Art({ preloadedImages, roundCounter }) {
   const promptMsg =
     "Are you sure you want to quit? Game progress is saved and will be loaded the next time you play.";
 
   useEffect(() => {
-    setImage(correctArt); // async behavior needed for the art image transition to work properly
-
     const promptHandler = (e) => {
       e.preventDefault();
       e.returnvalue = promptMsg;
@@ -32,20 +27,31 @@ function Art({ art, correctArt }) {
 
   return (
     <div className="art-container">
-      <ComponentTransition
-        enterAnimation={AnimationTypes.slideLeft.enter}
-        exitAnimation={AnimationTypes.slideRight.exit}
-      >
-        {image && (
-          <Magnifier
-            className="artwork"
-            src={correctArt.src}
-            height={"max-content"}
-            width={"max-content"}
-            mgShowOverflow={false}
-          />
-        )}
-      </ComponentTransition>
+      <ComponentTransitionList>
+        {preloadedImages.map((item, index) => {
+          if (index === roundCounter - 1) {
+            return (
+              <ComponentTransition
+                enterAnimation={AnimationTypes.slideLeft.enter}
+                exitAnimation={AnimationTypes.slideRight.exit}
+                animateContainerDuration={600}
+                animateContainer={true}
+                key={index}
+                animateOnMount={true}
+              >
+                <Magnifier
+                  className="artwork"
+                  src={item.src}
+                  height={"max-content"}
+                  width={"max-content"}
+                  mgShowOverflow={false}
+                />
+              </ComponentTransition>
+            );
+          }
+          return <></>;
+        })}
+      </ComponentTransitionList>
       {/* <Prompt message={() => promptMsg} /> */}
     </div>
   );
