@@ -1,5 +1,29 @@
+import gameAPI from '../../services/api';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
 const GameOver = ({ roundHistory, allCorrectArt }) => {
   console.log("allCorrectArt: ", allCorrectArt);
+  const signedInUserId = useSelector((state) => state.authorization.signedInUserId);
+  console.log(signedInUserId)
+  const total_score = roundHistory.filter((x) => x === "✔").length;
+  
+  const artworkIds = allCorrectArt.map((obj) => obj.objectID);
+  
+  // will happen once after mounting
+  useEffect(() => {
+    console.log(signedInUserId)
+
+    if (signedInUserId) {
+      const game = {
+        ...gameAPI({user_id: signedInUserId })
+      }
+  
+      game.createGame(total_score, artworkIds);
+    }
+
+  }, []);
+
 
   // clear all localStorage before starting a new game
   localStorage.removeItem("gameState");

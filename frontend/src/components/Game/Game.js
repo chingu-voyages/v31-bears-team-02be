@@ -4,6 +4,8 @@ import "./Game.scss";
 import GameUI from "./GameUI";
 import ArtInfoDialog from "./ArtInfoDialog";
 import GameOver from "./GameOver";
+import gameAPI from '../../services/api';
+import ls from '../../services/localStorage';
 import GameLanding from "./GameLanding";
 import { shuffleArray, fetchArt } from "./helper";
 import RoundHistory from "./RoundHistory";
@@ -13,6 +15,9 @@ import {
 } from "react-component-transition";
 
 const Game = () => {
+
+  ;
+
   const [art, setArt] = useState(null);
   const [correctArt, setCorrectArt] = useState(null);
   const [roundCounter, setRoundCounter] = useState(0);

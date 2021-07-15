@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { setModalClose, setModalContent } from '../Modal/modalSlice';
-import { setSignedInUser } from '../App/authSlice';
+import { setSignedInUser, setSignedInUserId } from '../App/authSlice';
 import credentials from '../../services/credentials';
 import ls from '../../services/localStorage';
 import './SignInForm.css';
@@ -43,9 +43,11 @@ const SignInForm = () => {
             // Store token in local storage
             user.setItem(token.authToken);
             // Grab username from stored token key
-            const { sub } = await user.decodeUserData();
+            const userData = await user.decodeUserData();
+            console.log(userData) // {userid: 1, iat: 1626128125, sub: "joel"}
             // Save username of signed up user in state
-            dispatch(setSignedInUser(sub));
+            dispatch(setSignedInUser(userData.sub));
+            dispatch(setSignedInUserId(userData.userid));
             // Signal request is done
             setRequesting(false);
             // Close modal

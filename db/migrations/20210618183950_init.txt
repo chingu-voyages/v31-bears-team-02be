@@ -21,7 +21,7 @@ exports.up = function(knex) {
 
 // down = rollback/undo migration changes
 exports.down = function(knex) {
-  return knex.schema.dropTable('person');
+  return knex.schema.dropTable('user');
 };
 
 // in terminal run:
