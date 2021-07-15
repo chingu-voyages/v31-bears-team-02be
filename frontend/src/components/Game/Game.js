@@ -4,8 +4,6 @@ import "./Game.scss";
 import GameUI from "./GameUI";
 import ArtInfoDialog from "./ArtInfoDialog";
 import GameOver from "./GameOver";
-import gameAPI from '../../services/api';
-import ls from '../../services/localStorage';
 import GameLanding from "./GameLanding";
 import { shuffleArray, fetchArt } from "./helper";
 import RoundHistory from "./RoundHistory";
@@ -15,9 +13,6 @@ import {
 } from "react-component-transition";
 
 const Game = () => {
-
-  ;
-
   const [art, setArt] = useState(null);
   const [correctArt, setCorrectArt] = useState(null);
   const [roundCounter, setRoundCounter] = useState(0);
@@ -27,12 +22,26 @@ const Game = () => {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
   ]);
   const [gameOver, setGameOver] = useState(false);
-  const [artImgLoaded, setArtImgLoaded] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [allCorrectArt, setAllCorrectArt] = useState([]);
   const [gameState, setGameState] = useState(
     JSON.parse(localStorage.getItem("gameState")) || null
   );
+  const [preloadedImages, setPreloadedImages] = useState([]);
+
+  function preloadArtImages(artArray) {
+    for (let i = 0; i < artArray.length; i++) {
+      const preLoadImg = new Image();
+      preLoadImg.src = artArray[i].primaryImage;
+      preLoadImg.onload = () => {
+        setPreloadedImages((arr) => {
+          const newArray = [...arr];
+          newArray[i] = preLoadImg;
+          return newArray;
+        });
+      };
+    }
+  }
 
   useEffect(() => {
     if (gameState) {
@@ -46,24 +55,19 @@ const Game = () => {
       setAllCorrectArt(gameState.allCorrectArt);
       setGameStarted(gameState.gameStarted);
 
-      for (let i = 0; i < gameState.art.length; i++) {
-        const preLoadImg = new Image();
-        preLoadImg.src = gameState.art[i].primaryImage;
-        preLoadImg.onload = () => {};
-      }
+      preloadArtImages(gameState.allCorrectArt);
     } else {
       const url =
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=11&q=painting";
       const artFetch = async () => {
         const randomArt = await fetchArt(url);
 
-        for (let i = 0; i < randomArt.length; i++) {
-          const preLoadImg = new Image();
-          preLoadImg.src = randomArt[i].primaryImage;
-          preLoadImg.onload = () => {};
-        }
+        const newAllCorrectArt = randomArt.slice(0, 10);
+        preloadArtImages(newAllCorrectArt);
 
-        setArt(randomArt);
+        setAllCorrectArt(newAllCorrectArt);
+
+        setArt(randomArt.slice(10));
         setRoundCounter((round) => round + 1);
       };
       artFetch();
@@ -74,21 +78,12 @@ const Game = () => {
     if (art) {
       if (art.length === 0) return;
 
-      setArtImgLoaded(false);
-      const newRoundArt = art.slice(0, 4);
-      const newCorrectArt = newRoundArt[0];
+      const newCorrectArt = allCorrectArt[roundCounter - 1];
+      const newRoundArt = art.slice(0, 3);
+      newRoundArt.push(newCorrectArt);
       shuffleArray(newRoundArt);
       setRoundArt(newRoundArt);
-      setArt((art) => art.slice(4));
-
-      // Preload image before rendering game ui
-      const artImg = new Image();
-      artImg.src = newCorrectArt.primaryImage;
-      artImg.onload = () => setArtImgLoaded(true);
-
-      const newAllCorrectArt = [...allCorrectArt];
-      newAllCorrectArt[roundCounter - 1] = newCorrectArt;
-      setAllCorrectArt(newAllCorrectArt);
+      setArt((art) => art.slice(3));
 
       setCorrectArt(newCorrectArt);
       console.log("newCorrectArt: ", newCorrectArt);
@@ -136,37 +131,37 @@ const Game = () => {
 
   return (
     <div className="game-screen">
-      {roundArt && correctArt && <Art correctArt={correctArt} art={art} />}
+      {preloadedImages[roundCounter - 1] && (
+        <Art preloadedImages={preloadedImages} roundCounter={roundCounter} />
+      )}
 
       <ComponentTransition
         enterAnimation={AnimationTypes.scale.enter}
         exitAnimation={AnimationTypes.fade.exit}
       >
-        {roundArt &&
-          art &&
-          (answerChosen ? (
-            <ArtInfoDialog
-              setAnswerChosen={setAnswerChosen}
-              setRoundCounter={setRoundCounter}
-              artInfo={correctArt}
-              setCorrectArt={setCorrectArt}
-              setGameOver={setGameOver}
+        {answerChosen ? (
+          <ArtInfoDialog
+            setAnswerChosen={setAnswerChosen}
+            setRoundCounter={setRoundCounter}
+            artInfo={correctArt}
+            setCorrectArt={setCorrectArt}
+            setGameOver={setGameOver}
+            roundCounter={roundCounter}
+          />
+        ) : (
+          preloadedImages[roundCounter - 1] && (
+            <GameUI
+              correctArt={correctArt}
+              roundArt={roundArt}
               roundCounter={roundCounter}
+              setAnswerChosen={setAnswerChosen}
+              roundHistory={roundHistory}
+              setRoundHistory={setRoundHistory}
             />
-          ) : (
-            artImgLoaded && (
-              <GameUI
-                correctArt={correctArt}
-                roundArt={roundArt}
-                roundCounter={roundCounter}
-                setAnswerChosen={setAnswerChosen}
-                roundHistory={roundHistory}
-                setRoundHistory={setRoundHistory}
-              />
-            )
-          ))}
+          )
+        )}
       </ComponentTransition>
-      {artImgLoaded && (
+      {preloadedImages[roundCounter - 1] && (
         <>
           {/* <div className="round-history">{roundHistory.join(" - ")}</div> */}
           <RoundHistory roundHistory={roundHistory} />
