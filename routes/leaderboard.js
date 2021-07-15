@@ -1,5 +1,5 @@
-import express from 'express';
-import LeaderboardController from '../controller/leaderboard';
+const express = require('express');
+const LeaderboardController = require('../controller/leaderboard');
 
 // Router for /leaderboard endpoint
 const leaderboardRouter = express.Router();
@@ -10,4 +10,4 @@ leaderboardRouter.route('/')
   .get(express.json(), LeaderboardController.getLeaderboard);
 
 
-export default leaderboardRouter;
+module.exports = leaderboardRouter;

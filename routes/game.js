@@ -1,5 +1,6 @@
-import express from 'express';
-import GameController from '../controller/game';
+const express = require('express');
+const GameController = require('../controller/game');
+
 
 // Router for /game endpoint
 const gameRouter = express.Router();
@@ -13,4 +14,4 @@ gameRouter.route('/update-game')
 	.post(express.json(), GameController.updateGame);
 
 
-export default gameRouter;
+module.exports = gameRouter;
