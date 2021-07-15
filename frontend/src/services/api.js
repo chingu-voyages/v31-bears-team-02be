@@ -1,6 +1,6 @@
 // import { updateGame } from "../../../dao/game";
 // const GAMEENDPOINT = 'http://localhost:4001';
-const GAMEENDPOINT = '';
+const GAMEENDPOINT = '/game';
 
 
 const gameAPI = ({ user_id } = '') => ({
@@ -16,7 +16,7 @@ const gameAPI = ({ user_id } = '') => ({
 
 				console.log(user_id);
 
-				const res = await fetch(`${path}/game`, {
+				const res = await fetch(`${path}`, {
 					method: 'POST',
 					headers: { 'content-type': 'application/json' },
 					body: JSON.stringify({ user_id, total_score, artworks })
