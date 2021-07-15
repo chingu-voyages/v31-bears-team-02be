@@ -9,4 +9,6 @@ userRouter.route("/").post(express.json(), UserController.createUser);
 // This is route '/user/auth'
 userRouter.route("/auth").post(express.json(), UserController.authenticateUser);
 
+userRouter.route("/verify").get(UserController.verifyUser);
+
 module.exports = userRouter;

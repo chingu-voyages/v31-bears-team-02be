@@ -50,6 +50,11 @@ class UserDAO {
     const nameInDB = await db(this.usersTable).where({ username }).first();
     return nameInDB;
   }
+  
+  async getByUserId(db, user_id) {
+    const nameInDB = await db(this.usersTable).where({ user_id }).first();
+    return nameInDB;
+  }
   /**
    * Validates password string to have between 8 and 72 characters
    * @param {string} password

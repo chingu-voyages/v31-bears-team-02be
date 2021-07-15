@@ -87,9 +87,9 @@ app.get('/flower', (req, res) => {
 });
 
 // API routes
-app.use('/user', userRouter);
-app.use('/game', gameRouter);
-app.use('/leaderboard', leaderboardRouter);
+app.use('/api/user', userRouter);
+app.use('/api/game', gameRouter);
+app.use('/api/leaderboard', leaderboardRouter);
 
 
 // Error handling

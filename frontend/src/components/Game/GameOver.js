@@ -1,6 +1,7 @@
 import gameAPI from '../../services/api';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import ls from '../../services/localStorage';
 
 const GameOver = ({ roundHistory, allCorrectArt }) => {
   console.log("allCorrectArt: ", allCorrectArt);
@@ -16,10 +17,11 @@ const GameOver = ({ roundHistory, allCorrectArt }) => {
 
     if (signedInUserId) {
       const game = {
-        ...gameAPI({user_id: signedInUserId })
+        ...gameAPI({user_id: signedInUserId }),
+        ...ls('artguessr')
       }
-  
-      game.createGame(total_score, artworkIds);
+
+      game.createGame(total_score, artworkIds, game.getItem());
     }
 
   }, []);

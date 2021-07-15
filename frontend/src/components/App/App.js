@@ -13,51 +13,56 @@ import Footer from "../Footer/Footer";
 import Game from "../Game/Game";
 import "./App.css";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { loginSuccess, logout } from './authSlice';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginSuccess,
+  logout,
+  setSignedInUser,
+  setSignedInUserId,
+} from "./authSlice";
 
-import credentials from '../../services/credentials';
-import ls from '../../services/localStorage';
+import credentials from "../../services/credentials";
+import ls from "../../services/localStorage";
 
 const token = {
-  ...ls('artguessr'),
-  ...credentials({ username: 'demo', password: 'demo' })
-}
+  ...ls("artguessr"),
+  ...credentials({ username: "demo", password: "demo" }),
+};
 
 function App() {
   const dispatch = useDispatch();
   const signedInUser = useSelector((state) => state.authorization.signedInUser);
-  
+
+  const handleUserVerify = async (tokenStr) => {
+    const user = await token.verifyUser(tokenStr);
+    console.log(user);
+    dispatch(setSignedInUserId(user.user_id));
+    dispatch(setSignedInUser(user.username));
+
+    dispatch(loginSuccess());
+  };
+
   /* When App component mounts, check for token in local storage,
   if found, dispatch callback to set authenticated state to 'true',
-  else set to 'false'. Has 'signedInUser' state value as dependency */ 
+  else set to 'false'. Has 'signedInUser' state value as dependency */
   React.useEffect(() => {
+    console.log(signedInUser);
     if (token.getItem()) {
-      dispatch(loginSuccess())
+      console.log("token found");
+      handleUserVerify(token.getItem());
     } else {
-      dispatch(logout())
+      dispatch(logout());
     }
-  }, [signedInUser, dispatch]);
+  });
 
   return (
     <div className="App">
       <TopNavBar />
       <Switch>
-        <PublicRoute
-          exact
-          path={HOME}
-          component={HomePage}
-        />
-        <PrivateRoute
-          exact
-          path={USERHOME}
-          component={HomePage}
-        />
+        <PublicRoute exact path={HOME} component={HomePage} />
+        <PrivateRoute exact path={USERHOME} component={HomePage} />
         <Route path="/game" component={Game} />
-        <PrivateRoute
-          path="*"
-          component={NotFound}
-        />
+        <PrivateRoute path="*" component={NotFound} />
       </Switch>
       <Footer />
       <Modal />

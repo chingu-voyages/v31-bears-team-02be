@@ -44,10 +44,10 @@ const SignInForm = () => {
             user.setItem(token.authToken);
             // Grab username from stored token key
             const userData = await user.decodeUserData();
-            console.log(userData) // {userid: 1, iat: 1626128125, sub: "joel"}
+            console.log(userData) // {user_id: 1, iat: 1626128125, sub: "joel"}
             // Save username of signed up user in state
             dispatch(setSignedInUser(userData.sub));
-            dispatch(setSignedInUserId(userData.userid));
+            dispatch(setSignedInUserId(userData.user_id));
             // Signal request is done
             setRequesting(false);
             // Close modal

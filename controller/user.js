@@ -3,6 +3,27 @@ const path = require('path');
 const UserModel = require('../dao/user');
 
 class UserController {
+	async verifyUser(req, res, next) {
+		const authToken = req.get('Authorization') || '';
+
+		if (!authToken.toLowerCase().startsWith('bearer ')) {
+			return res.status(401).json({ error: 'Missing bearer token' });
+		}
+		const bearerToken = authToken.slice(7, authToken.length);
+		
+		try {
+			const payload = UserModel.verifyJwt(bearerToken);
+			
+			console.log(payload);
+			const userData = await UserModel.getByUserId(req.app.get('db'), payload.user_id);
+			console.log(userData);
+			const {user_id, username, date_created} = userData;
+			res.status(200).json({user_id, username, date_created});
+		} catch (error) {
+			res.status(401).json({ error: 'Unauthorized request' });
+		}
+	}
+
 	async createUser(req, res, next) {
 		const { username, password } = req.body;
 		const db = req.app.get('db');
@@ -68,7 +89,7 @@ class UserController {
 
 			// If both found, return authorization token
 			return res.send({
-				authToken: UserModel.createJWT(validUser.username, { userid: validUser.user_id }),
+				authToken: UserModel.createJWT(validUser.username, { user_id: validUser.user_id }),
 			});
 		} catch (error) { next(error) };
 	}
