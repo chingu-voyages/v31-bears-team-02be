@@ -1,4 +1,5 @@
-const USERENDPOINT = 'http://localhost:4001/user';
+// const USERENDPOINT = 'http://localhost:4001/user';
+const USERENDPOINT = '';
 
 const credentials = ({ username = '', password = '' } = {}) => ({
   data: {

@@ -1,5 +1,6 @@
 // import { updateGame } from "../../../dao/game";
-const GAMEENDPOINT = 'http://localhost:4001';
+// const GAMEENDPOINT = 'http://localhost:4001';
+const GAMEENDPOINT = '';
 
 
 const gameAPI = ({ user_id } = '') => ({
