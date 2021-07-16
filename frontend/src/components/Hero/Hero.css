@@ -91,3 +91,8 @@
   object-fit: none;
   animation: img-slide 100s linear infinite;
 }
+
+
+.hero-img {
+  max-height: 500px;
+}

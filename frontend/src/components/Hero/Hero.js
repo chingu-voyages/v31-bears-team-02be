@@ -25,24 +25,26 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero">
-      <div className={`centered frame ${bigImgLoaded ? 'animate' : ''}`}>
-        {backgroundImg && (
-          <img src={backgroundImg.src} alt="test" />
-        )}
-        <div className="hero-caption">
-          <h1>Art lovers wanted!</h1>
-          <p>
-            Join our community of art explorers and participate to put your
-            knowledge to the test. Will you accept the challenge? You can play
-            right away, and if you want to save your score you can sign up and
-            create an account. Let&apos;s get art-guessing!
-          </p>
-          <button type="button">Let&apos;s Play</button>
-          <button type="button">Sign up</button>
+    <section className="container mx-auto">
+    <div className="relative max-h-96 overflow-hidden">
+      {backgroundImg && (
+        <img className={`${bigImgLoaded ? 'animate-img-slide object-none' : 'object-fit'}`} src={backgroundImg.src} alt="Van Gogh's" />
+      )}
+      <div className="w-full sm:w-5/6 lg:w-1/2 absolute object-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-50 bg-opacity-75 backdrop-filter backdrop-blur-sm space-y-6 p-6">
+        <h1>Art lovers wanted!</h1>
+        <p className="lg:text-xl">
+          Join our community of art explorers and participate to put your
+          knowledge to the test. Will you accept the challenge? You can play
+          right away, and if you want to save your score you can sign up and
+          create an account. Let&apos;s get art-guessing!
+        </p>
+        <div className="space-x-4">
+          <button className="text-xl" type="button">Let&apos;s Play</button>
+          <button className="text-xl" type="button">Sign up</button>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   );
 };
 
