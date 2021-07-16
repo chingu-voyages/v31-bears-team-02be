@@ -5,3 +5,9 @@
   align-items: center;
   height: 10vh;
 }
+
+.nav-links li:hover,
+.nav-links button:hover {
+  /* color: rgb(0, 98, 184); */
+  transform: scale(1.1);
+}

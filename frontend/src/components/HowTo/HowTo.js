@@ -3,7 +3,7 @@ import "./HowTo.css";
 
 const HowTo = () => (
   <section className="container mt-16 space-y-8 mx-auto max-w-6xl">
-    <h2>How to play:</h2>
+    <h2>How to play</h2>
     <section className="flex flex-row items-center flex-wrap space-y-8 sm:flex-nowrap sm:space-y-0 lg:w-max mx-auto">
       <div className="relative mx-auto howto pb-2/3">
         <img
@@ -16,7 +16,6 @@ const HowTo = () => (
       </div>
 
       <ul className="p-4 sm:ml-6 list-disc items-center space-y-4 max-w-prose">
-  
         <li>Each game consists of ten rounds.</li>
         <li>Each round you will be shown an artwork or artifact.</li>
         <li>

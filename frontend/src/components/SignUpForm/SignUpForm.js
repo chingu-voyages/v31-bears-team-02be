@@ -135,7 +135,7 @@ const SignUpForm = () => {
             <input
               required
               name="password"
-              type="text"
+              type="password"
               className="w-full text-2xl ssf font-bold"
               pattern=".{8,}"
               onChange={({ target: { value } }) => {

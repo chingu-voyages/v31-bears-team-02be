@@ -1,23 +1,24 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { setSignedInUser } from '../App/authSlice';
-import { setModalOpen, setModalContent } from '../Modal/modalSlice';
+import { Link, NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setSignedInUser } from "../App/authSlice";
+import { setModalOpen, setModalContent } from "../Modal/modalSlice";
 
 import "./TopNavBar.css";
 
-import credentials from '../../services/credentials';
-import ls from '../../services/localStorage';
+import credentials from "../../services/credentials";
+import ls from "../../services/localStorage";
 
 const token = {
-  ...ls('artguessr'),
-  ...credentials({ username: 'demo', password: 'demo' })
-}
+  ...ls("artguessr"),
+  ...credentials({ username: "demo", password: "demo" }),
+};
 
 const TopNavBar = () => {
-
-  const isAuthenticated = useSelector((state) => state.authorization.isAuthenticated);
-  const signedInUser = useSelector((state) => state.authorization.signedInUser)
+  const isAuthenticated = useSelector(
+    (state) => state.authorization.isAuthenticated
+  );
+  const signedInUser = useSelector((state) => state.authorization.signedInUser);
   const dispatch = useDispatch();
 
   return (
@@ -29,31 +30,35 @@ const TopNavBar = () => {
         {isAuthenticated ? (
           <ul className="flex flex-row justify-end sm:mt-0 items-center text-lg md:text-xl space-x-3 ssf capitalize font-semibold">
             <li>
-              <Link to="/game">Play</Link>
+              <NavLink to="/game">Play</NavLink>
             </li>
             <li>
               <span>{signedInUser}</span>
-            </li>
-            <li>
-              <button type="button" className="font-semibold" onClick={() => {
-                token.removeItem();
-                dispatch(setSignedInUser(''));
-              }}>
-                Sign Out
-              </button>
-            </li>
-          </ul>
-        ) : (
-          <ul className="flex flex-row justify-end sm:mt-0 items-center text-lg md:text-xl space-x-3 ssf capitalize font-semibold">
-            <li>
-              <Link to="/game">Play</Link>
             </li>
             <li>
               <button
                 type="button"
                 className="font-semibold"
                 onClick={() => {
-                  dispatch(setModalContent('SIGNUPFORM'));
+                  token.removeItem();
+                  dispatch(setSignedInUser(""));
+                }}
+              >
+                Sign Out
+              </button>
+            </li>
+          </ul>
+        ) : (
+          <ul className="nav-links flex flex-row justify-end sm:mt-0 items-center text-lg md:text-xl space-x-3 ssf capitalize font-semibold">
+            <li>
+              <NavLink to="/game">Play</NavLink>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="font-semibold"
+                onClick={() => {
+                  dispatch(setModalContent("SIGNUPFORM"));
                   dispatch(setModalOpen());
                 }}
               >
@@ -61,21 +66,22 @@ const TopNavBar = () => {
               </button>
             </li>
             <li>
-              <button 
-              type="button" 
-              className="font-semibold"
-              onClick={() => {
-                dispatch(setModalContent('SIGNINFORM'));
-                dispatch(setModalOpen());
-              }}>
+              <button
+                type="button"
+                className="font-semibold"
+                onClick={() => {
+                  dispatch(setModalContent("SIGNINFORM"));
+                  dispatch(setModalOpen());
+                }}
+              >
                 Sign in
               </button>
             </li>
           </ul>
         )}
       </nav>
-    </header >
-  )
+    </header>
+  );
 };
 
 export default TopNavBar;

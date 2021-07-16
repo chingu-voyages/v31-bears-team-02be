@@ -44,6 +44,7 @@ function Art({ preloadedImages, roundCounter }) {
                   src={item.src}
                   height={"max-content"}
                   width={"max-content"}
+                  key={index}
                   mgShowOverflow={false}
                 />
               </ComponentTransition>
