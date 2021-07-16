@@ -10,10 +10,12 @@ const requireAuth = (req, res, next) => {
 
   try {
     const payload = UserModel.verifyJwt(bearerToken);
+
     UserModel.getByUserId(req.app.get("db"), payload.user_id)
       .then((user) => {
         if (!user)
           return res.status(401).json({ error: "Unauthorized request" });
+        console.log(payload);
 
         req.user = user;
         next();
