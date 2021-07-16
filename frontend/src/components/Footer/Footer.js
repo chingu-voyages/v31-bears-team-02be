@@ -9,7 +9,7 @@ const Footer = () => (
       voyage.
     </p>
     <p>Our team:</p>
-    <ul className="flex flex-row space-x-8">
+    <ul className="flex flex-row flex-wrap justify-center space-x-8">
       <li>Jim</li>
       <li>Anjana</li>
       <li>Kapre</li>

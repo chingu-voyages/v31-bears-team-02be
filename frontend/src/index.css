@@ -19,12 +19,15 @@
 
   h1 {
     @apply text-5xl;
+    @apply font-semibold;
   }
   h2 {
     @apply text-3xl;
+    @apply font-semibold;
   }
   h3 {
     @apply text-2xl;
+    @apply font-semibold;
   }
   h4 {
     @apply text-xl;
