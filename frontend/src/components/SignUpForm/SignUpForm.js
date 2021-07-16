@@ -101,52 +101,59 @@ const SignUpForm = () => {
         }
       }}
     >
-      <fieldset className="stack">
-        <legend>
+      <fieldset>
+        <legend className="mb-4">
           <h2>Sign Up</h2>
         </legend>
-        <p>
+        <p className="max-w-prose mx-auto">
           Enter a username and password to create an account. Usernames are
           unique and passwords must be longer than 8 characters.
         </p>
-        {errorMsg && <aside>{`Error: ${errorMsg}`}</aside>}
+        {errorMsg && <aside className="mx-auto">{`Error: ${errorMsg}`}</aside>}
         {requesting && (
-          <aside>
+          <aside className="mx-auto">
             <p>Loading...</p>
           </aside>
         )}
-        <label htmlFor="username">
-          <p>Username</p>
-          <input
-            required
-            name="username"
-            type="text"
-            onChange={({ target: { value } }) => {
-              setUsername(value);
-              if (!usernameTouched) setUsernameTouched(true);
-            }}
-          />
-          {usernameFeedback && usernameTouched && <p>{usernameFeedback}</p>}
-        </label>
-        <label htmlFor="password">
-          <p>Password</p>
-          <input
-            required
-            name="password"
-            type="text"
-            pattern=".{8,}"
-            onChange={({ target: { value } }) => {
-              setPassword(value);
-              if (!passwordTouched) setPasswordTouched(true);
-            }}
-          />
-          {passwordFeedback && passwordTouched && <p>{passwordFeedback}</p>}
-        </label>
+        <div className="flex flex-col items-center w-3/4 mx-auto my-4">
+          <label className="w-full" htmlFor="username">
+            <p className="text-xl ssf font-semibold">Username</p>
+            <input
+              required
+              name="username"
+              type="text"
+              className="w-full text-2xl ssf font-bold"
+              onChange={({ target: { value } }) => {
+                setUsername(value);
+                if (!usernameTouched) setUsernameTouched(true);
+              }}
+            />
+            {usernameFeedback && usernameTouched && <p>{usernameFeedback}</p>}
+          </label>
+          <label className="w-full" htmlFor="password">
+            <p className="text-xl ssf font-semibold">Password</p>
+            <input
+              required
+              name="password"
+              type="text"
+              className="w-full text-2xl ssf font-bold"
+              pattern=".{8,}"
+              onChange={({ target: { value } }) => {
+                setPassword(value);
+                if (!passwordTouched) setPasswordTouched(true);
+              }}
+            />
+            {passwordFeedback && passwordTouched && <p>{passwordFeedback}</p>}
+          </label>
+        </div>
       </fieldset>
-      <fieldset>
-        <button type="submit">Submit</button>
+      <fieldset className="space-x-10">
+        <button className="text-xl ssf font-semibold" type="submit">
+          Submit
+        </button>
         <button
           type="button"
+          className="text-xl ssf font-semibold"
           onClick={() => {
             dispatch(setModalContent("SIGNINFORM"));
           }}

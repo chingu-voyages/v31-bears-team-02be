@@ -1,3 +1,4 @@
+/*
 .how-to-play {
   width: 100%;
   max-width: 45em;
@@ -40,4 +41,10 @@
 .how-to-play > section > img {
   flex-basis: 640px;
   flex-grow: 1;
+}
+
+*/
+.howto {
+  width: 255px;
+  height: 450px;
 }

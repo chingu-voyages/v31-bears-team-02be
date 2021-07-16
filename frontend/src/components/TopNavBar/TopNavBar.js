@@ -21,21 +21,21 @@ const TopNavBar = () => {
   const dispatch = useDispatch();
 
   return (
-    <header className="top-nav-header">
-      <h2>
+    <header className="flex flex-wrap items-center p-6 h-24 lg:container lg:mx-auto">
+      <h2 className="font-semibold">
         <Link to="/">ArtGuessr</Link>
       </h2>
-      <nav>
+      <nav className="flex-auto">
         {isAuthenticated ? (
-          <ul>
+          <ul className="flex flex-row justify-end sm:mt-0 items-center text-lg md:text-xl space-x-3 ssf capitalize font-semibold">
             <li>
               <Link to="/game">Play</Link>
             </li>
             <li>
-              <h3>{signedInUser}</h3>
+              <span>{signedInUser}</span>
             </li>
             <li>
-              <button type="button" onClick={() => {
+              <button type="button" className="font-semibold" onClick={() => {
                 token.removeItem();
                 dispatch(setSignedInUser(''));
               }}>
@@ -44,13 +44,14 @@ const TopNavBar = () => {
             </li>
           </ul>
         ) : (
-          <ul>
+          <ul className="flex flex-row justify-end sm:mt-0 items-center text-lg md:text-xl space-x-3 ssf capitalize font-semibold">
             <li>
               <Link to="/game">Play</Link>
             </li>
             <li>
               <button
                 type="button"
+                className="font-semibold"
                 onClick={() => {
                   dispatch(setModalContent('SIGNUPFORM'));
                   dispatch(setModalOpen());
@@ -60,7 +61,10 @@ const TopNavBar = () => {
               </button>
             </li>
             <li>
-              <button type="button" onClick={() => {
+              <button 
+              type="button" 
+              className="font-semibold"
+              onClick={() => {
                 dispatch(setModalContent('SIGNINFORM'));
                 dispatch(setModalOpen());
               }}>

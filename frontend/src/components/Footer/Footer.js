@@ -1,18 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 
 const Footer = () => (
-  <footer>
+  <footer className="mt-16 container mx-auto space-y-6">
     <h2>Contact Us</h2>
 
     <p>
-      Made as part of
-      {' '}
-      <a href="https://chingu.io">Chingu&apos;s </a>
-      {' '}
-      31st voyage.
+      Made as part of <a href="https://chingu.io">Chingu&apos;s </a> 31st
+      voyage.
     </p>
     <p>Our team:</p>
-    <ul>
+    <ul className="flex flex-row flex-wrap justify-center space-x-8">
       <li>Jim</li>
       <li>Anjana</li>
       <li>Kapre</li>
@@ -21,9 +18,7 @@ const Footer = () => (
       <li>Michael</li>
       <li>Joel</li>
     </ul>
-    <p>
-      © Chingu v31 bears-team-02
-    </p>
+    <p className="text-center">© Chingu v31 bears-team-02</p>
   </footer>
 );
 
