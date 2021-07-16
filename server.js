@@ -1,27 +1,33 @@
 // server.js
 //
 // Load enviroment variables using a .env file
-require('dotenv').config();
+require("dotenv").config();
 // Utility modules
-import path from 'path';
-import fs from 'fs';
+import path from "path";
+import fs from "fs";
 // Api framework and related modules
-import express from 'express';
-import logger from 'morgan';
-import cors from 'cors';
+import express from "express";
+import logger from "morgan";
+import cors from "cors";
 // Database query builder
-import knex from 'knex';
+import knex from "knex";
 
 // Express Routes
-import userRouter from './routes/user';
-import gameRouter from './routes/game';
+import userRouter from "./routes/user";
+import gameRouter from "./routes/game";
 
 // Import globals from enviroment variables
-import config from './config';
-import leaderboardRouter from './routes/leaderboard';
+import config from "./config";
+import leaderboardRouter from "./routes/leaderboard";
 
 const {
-	NODE_ENV, PORT, RDS_HOSTNAME, RDS_USERNAME, RDS_PASSWORD, RDS_PORT, RDS_DB_NAME
+  NODE_ENV,
+  PORT,
+  RDS_HOSTNAME,
+  RDS_USERNAME,
+  RDS_PASSWORD,
+  RDS_PORT,
+  RDS_DB_NAME,
 } = config;
 
 //const router = require('./routes');
@@ -34,80 +40,101 @@ export const app = express();
 /* Establish connection to database and save as property of 
 express app with name 'db'. To access the database use 
 'app.get('db')' or if inside 'app.use()' with 'req.app.get('db')' */
-app.set('db', knex({
-	client: 'pg',
-	connection: {
-		database: RDS_DB_NAME,
-		user: RDS_USERNAME,
-		password: RDS_PASSWORD,
-		port: RDS_PORT,
-		host: RDS_HOSTNAME
-	},
-}));
+app.set(
+  "db",
+  knex({
+    client: "pg",
+    connection: {
+      database: RDS_DB_NAME,
+      user: RDS_USERNAME,
+      password: RDS_PASSWORD,
+      port: RDS_PORT,
+      host: RDS_HOSTNAME,
+    },
+  })
+);
 
 // Setup logger with formats for each enviroment ('common' for production and 'dev' for development)
-app.use(logger((NODE_ENV === 'production') ? 'common' : 'dev', {
-	// Skip logging when run in test enviroment
-	skip: () => NODE_ENV === 'test',
-}));
+app.use(
+  logger(NODE_ENV === "production" ? "common" : "dev", {
+    // Skip logging when run in test enviroment
+    skip: () => NODE_ENV === "test",
+  })
+);
 
-if (NODE_ENV === 'production') {
-	// Append logging to file
-	app.use(logger('common', {
-		// create a write stream in append mode and log to file 'express-access.log'
-		stream: fs.createWriteStream(path.join(__dirname, '..', '..', 'log', 'express-access.log'), { flags: 'a' })
-	}))
+if (NODE_ENV === "production") {
+  // Append logging to file
+  app.use(
+    logger("common", {
+      // create a write stream in append mode and log to file 'express-access.log'
+      stream: fs.createWriteStream(
+        path.join(__dirname, "..", "..", "log", "express-access.log"),
+        { flags: "a" }
+      ),
+    })
+  );
 } else {
-	// Append logging to file
-	app.use(logger('common', {
-		// create a write stream in append mode and log to file 'access.log'
-		// pwd in production is /var/app/current, set log file address to '../../log/' so access.log is saved in /var/log/
-		stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-	}))
+  // Append logging to file
+  app.use(
+    logger("common", {
+      // create a write stream in append mode and log to file 'access.log'
+      // pwd in production is /var/app/current, set log file address to '../../log/' so access.log is saved in /var/log/
+      stream: fs.createWriteStream(path.join(__dirname, "access.log"), {
+        flags: "a",
+      }),
+    })
+  );
 }
 
 // Handle cors
-app.use(cors())
+app.use(cors());
 
 // Serve static files located in frontend/build
-app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+app.use(express.static(path.join(__dirname, "frontend", "build")));
 
 // Testing routes
-app.get('/', (req, res) => {
-	res.send('just gonna send it');
+app.get("/", (req, res) => {
+  res.send("just gonna send it");
 });
 
-app.get('/flower', (req, res) => {
+app.get("/flower", (req, res) => {
   res.json({
-    name: 'Dandelion',
-    colour: 'Blue-ish',
-    env: process.env, 		// for testing
-		port: PORT						// for testing
+    name: "Dandelion",
+    colour: "Blue-ish",
+    env: process.env, // for testing
+    port: PORT, // for testing
   });
 });
 
 // API routes
-app.use('/api/user', userRouter);
-app.use('/api/game', gameRouter);
-app.use('/api/leaderboard', leaderboardRouter);
+app.use("/api/user", userRouter);
+app.use("/api/game", gameRouter);
+app.use("/api/leaderboard", leaderboardRouter);
 
+// Every other route sent to react to be managed
+app.get("/*", function (req, res, next) {
+  res.sendFile(path.join(__dirname, "frontend","build", "index.html"), function (err) {
+    if (err) {
+      next(err);
+    }
+  });
+});
 
 // Error handling
 app.use((error, req, res, next) => {
-	let response;
-	if (NODE_ENV === 'production') {
-		response = { error: error.message };
-	} else {
-		console.error(error);
-		response = { error: error.message };
-	}
-	res.status(500).json(response);
+  let response;
+  if (NODE_ENV === "production") {
+    response = { error: error.message };
+  } else {
+    console.error(error);
+    response = { error: error.message };
+  }
+  res.status(500).json(response);
 });
 
 app.listen(PORT, () => {
-	console.log(`Server listening at port ${PORT}.`);
+  console.log(`Server listening at port ${PORT}.`);
 });
-
 
 // express.json() is a built-in middleware, parses incoming JSON requests, returns Object
 // app.use(express.json());

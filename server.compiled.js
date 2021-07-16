@@ -30,7 +30,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 // server.js
 //
 // Load enviroment variables using a .env file
-require('dotenv').config(); // Utility modules
+require("dotenv").config(); // Utility modules
 
 
 var NODE_ENV = _config["default"].NODE_ENV,
@@ -51,8 +51,8 @@ express app with name 'db'. To access the database use
 'app.get('db')' or if inside 'app.use()' with 'req.app.get('db')' */
 
 exports.app = app;
-app.set('db', (0, _knex["default"])({
-  client: 'pg',
+app.set("db", (0, _knex["default"])({
+  client: "pg",
   connection: {
     database: RDS_DB_NAME,
     user: RDS_USERNAME,
@@ -62,28 +62,28 @@ app.set('db', (0, _knex["default"])({
   }
 })); // Setup logger with formats for each enviroment ('common' for production and 'dev' for development)
 
-app.use((0, _morgan["default"])(NODE_ENV === 'production' ? 'common' : 'dev', {
+app.use((0, _morgan["default"])(NODE_ENV === "production" ? "common" : "dev", {
   // Skip logging when run in test enviroment
   skip: function skip() {
-    return NODE_ENV === 'test';
+    return NODE_ENV === "test";
   }
 }));
 
-if (NODE_ENV === 'production') {
+if (NODE_ENV === "production") {
   // Append logging to file
-  app.use((0, _morgan["default"])('common', {
+  app.use((0, _morgan["default"])("common", {
     // create a write stream in append mode and log to file 'express-access.log'
-    stream: _fs["default"].createWriteStream(_path["default"].join(__dirname, '..', '..', 'log', 'express-access.log'), {
-      flags: 'a'
+    stream: _fs["default"].createWriteStream(_path["default"].join(__dirname, "..", "..", "log", "express-access.log"), {
+      flags: "a"
     })
   }));
 } else {
   // Append logging to file
-  app.use((0, _morgan["default"])('common', {
+  app.use((0, _morgan["default"])("common", {
     // create a write stream in append mode and log to file 'access.log'
     // pwd in production is /var/app/current, set log file address to '../../log/' so access.log is saved in /var/log/
-    stream: _fs["default"].createWriteStream(_path["default"].join(__dirname, 'access.log'), {
-      flags: 'a'
+    stream: _fs["default"].createWriteStream(_path["default"].join(__dirname, "access.log"), {
+      flags: "a"
     })
   }));
 } // Handle cors
@@ -91,15 +91,15 @@ if (NODE_ENV === 'production') {
 
 app.use((0, _cors["default"])()); // Serve static files located in frontend/build
 
-app.use(_express["default"]["static"](_path["default"].join(__dirname, 'frontend', 'build'))); // Testing routes
+app.use(_express["default"]["static"](_path["default"].join(__dirname, "frontend", "build"))); // Testing routes
 
-app.get('/', function (req, res) {
-  res.send('just gonna send it');
+app.get("/", function (req, res) {
+  res.send("just gonna send it");
 });
-app.get('/flower', function (req, res) {
+app.get("/flower", function (req, res) {
   res.json({
-    name: 'Dandelion',
-    colour: 'Blue-ish',
+    name: "Dandelion",
+    colour: "Blue-ish",
     env: process.env,
     // for testing
     port: PORT // for testing
@@ -107,14 +107,22 @@ app.get('/flower', function (req, res) {
   });
 }); // API routes
 
-app.use('/user', _user["default"]);
-app.use('/game', _game["default"]);
-app.use('/leaderboard', _leaderboard["default"]); // Error handling
+app.use("/api/user", _user["default"]);
+app.use("/api/game", _game["default"]);
+app.use("/api/leaderboard", _leaderboard["default"]); // Every other route sent to react to be managed
+
+app.get("/*", function (req, res, next) {
+  res.sendFile(_path["default"].join(__dirname, "frontend", "build", "index.html"), function (err) {
+    if (err) {
+      next(err);
+    }
+  });
+}); // Error handling
 
 app.use(function (error, req, res, next) {
   var response;
 
-  if (NODE_ENV === 'production') {
+  if (NODE_ENV === "production") {
     response = {
       error: error.message
     };
