@@ -16,7 +16,7 @@ const gameAPI = ({ user_id } = "") => ({
         method: "POST",
         headers: {
           "content-type": "application/json",
-          Authorization: `Bearer${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ user_id, total_score, artworks }),
       });
@@ -42,7 +42,7 @@ const gameAPI = ({ user_id } = "") => ({
         method: "POST",
         headers: {
           "content-type": "application/json",
-          Authorization: `Bearer${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ username, password }),
       });
