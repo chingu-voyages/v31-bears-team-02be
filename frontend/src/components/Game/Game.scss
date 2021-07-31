@@ -63,11 +63,13 @@
 }
 
 .choice-button {
-  white-space: normal;
+  white-space: nowrap;
   word-wrap: break-word;
   height: 4rem;
   width: 20rem;
   border: 1px #33333399 solid;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .choice-button:hover {

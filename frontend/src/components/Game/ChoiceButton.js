@@ -12,9 +12,7 @@ const ChoiceButton = ({ artistName, handleClick }) => {
       type="button"
       value={artistName}
     >
-      {artistName.length > 40
-        ? artistName.substring(0, 40) + "..."
-        : artistName}
+      {artistName}
     </button>
   );
 };
