@@ -277,7 +277,13 @@
 
 @media only screen and (max-width: 500px) {
   .game-screen {
-    grid-template-rows: 50vh 38vh 2.5vh 2.5vh;
+    /* grid-template-rows: 50vh 38vh 2.5vh 2.5vh; */
+    display: block;
+  }
+
+  .art-container {
+    height: 50vh;
+    align-items: center;
   }
 
   .artwork {
