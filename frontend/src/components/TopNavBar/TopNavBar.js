@@ -22,9 +22,9 @@ const TopNavBar = () => {
   const dispatch = useDispatch();
 
   return (
-    <header className="flex flex-wrap items-center">
+    <header className="container mx-auto flex flex-wrap items-center">
       <nav className="flex flex-wrap items-center justify-between w-full px-4">
-        <h2 className="font-semibold">
+        <h2 className="title font-semibold">
           <Link to="/">ArtGuessr</Link>
         </h2>
         <input className="menu-btn hidden" type="checkbox" id="menu-btn" />
