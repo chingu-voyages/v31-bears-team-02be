@@ -22,23 +22,37 @@ const TopNavBar = () => {
   const dispatch = useDispatch();
 
   return (
-    <header className="flex flex-wrap items-center p-6 h-24 lg:container lg:mx-auto">
-      <h2 className="font-semibold">
-        <Link to="/">ArtGuessr</Link>
-      </h2>
-      <nav className="flex-auto">
+    <header className="flex flex-wrap items-center">
+      <nav className="flex flex-wrap items-center justify-between w-full px-4">
+        <h2 className="font-semibold">
+          <Link to="/">ArtGuessr</Link>
+        </h2>
+        <input className="menu-btn hidden" type="checkbox" id="menu-btn" />
+        <label
+          className="menu-icon block cursor-pointer md:hidden px-2 py-4 relative select-none"
+          for="menu-btn"
+        >
+          <span className="navicon bg-grey-darkest flex items-center relative"></span>
+        </label>
         {isAuthenticated ? (
-          <ul className="flex flex-row justify-end sm:mt-0 items-center text-lg md:text-xl space-x-3 ssf capitalize font-semibold">
-            <li>
-              <NavLink to="/game">Play</NavLink>
+          <ul className="menu border-b md:border-none flex justify-end list-reset m-0 w-full md:w-auto">
+            <li className="border-t md:border-none">
+              <NavLink
+                className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker font-bold"
+                to="/game"
+              >
+                Play
+              </NavLink>
             </li>
-            <li>
-              <span>{signedInUser}</span>
+            <li className="border-t md:border-none">
+              <span className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker">
+                {signedInUser}
+              </span>
             </li>
-            <li>
+            <li className="border-t md:border-none">
               <button
                 type="button"
-                className="font-semibold"
+                className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker"
                 onClick={() => {
                   token.removeItem();
                   dispatch(setSignedInUser(""));
@@ -49,14 +63,19 @@ const TopNavBar = () => {
             </li>
           </ul>
         ) : (
-          <ul className="nav-links flex flex-row justify-end sm:mt-0 items-center text-lg md:text-xl space-x-3 ssf capitalize font-semibold">
-            <li>
-              <NavLink to="/game">Play</NavLink>
+          <ul className="menu border-b md:border-none flex justify-end list-reset m-0 w-full md:w-auto">
+            <li className="border-t md:border-none">
+              <NavLink
+                className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker font-bold"
+                to="/game"
+              >
+                Play
+              </NavLink>
             </li>
-            <li>
+            <li className="border-t md:border-none">
               <button
                 type="button"
-                className="font-semibold"
+                className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker"
                 onClick={() => {
                   dispatch(setModalContent("SIGNUPFORM"));
                   dispatch(setModalOpen());
@@ -65,10 +84,10 @@ const TopNavBar = () => {
                 Sign Up
               </button>
             </li>
-            <li>
+            <li className="border-t md:border-none">
               <button
                 type="button"
-                className="font-semibold"
+                className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker"
                 onClick={() => {
                   dispatch(setModalContent("SIGNINFORM"));
                   dispatch(setModalOpen());
