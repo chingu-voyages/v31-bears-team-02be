@@ -6,7 +6,7 @@ const Features = () => (
     <h2>Are you ready to be an art explorer?</h2>
     <div className="flex flex-auto flex-wrap lg:flex-nowrap mt-8 lg:space-x-12 space-y-8 lg:space-y-0">
       {/* Each feature section can have a 'painting' image that ilustrates each feature */}
-      <section className="flex-auto space-y-8">
+      <section className="flex-auto lg:flex-1 space-y-8">
         <h3>Play</h3>
         <figure className="space-y-8 flex flex-col sm:flex-row sm:items-center lg:flex-col space-around">
           <img
@@ -22,7 +22,7 @@ const Features = () => (
         </figure>
       </section>
 
-      <section className="flex-auto space-y-8">
+      <section className="flex-auto lg:flex-1 space-y-8">
         <h3>Learn</h3>
         <figure className="space-y-8 flex flex-col sm:flex-row sm:items-center lg:flex-col space-around">
           <img
@@ -39,7 +39,7 @@ const Features = () => (
         </figure>
       </section>
 
-      <section className="flex-auto space-y-8">
+      <section className="flex-auto lg:flex-1 space-y-8">
         <h3>Explore</h3>
         <figure className="space-y-8 flex flex-col sm:flex-row sm:items-center lg:flex-col space-around">
           <img
