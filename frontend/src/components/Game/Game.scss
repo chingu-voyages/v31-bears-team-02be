@@ -189,11 +189,9 @@
 }
 
 .image-container {
-  // overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+  display: contents;
 }
+
 .art-frame {
   background-color: beige;
   // display: grid;
